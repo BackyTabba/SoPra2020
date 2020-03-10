@@ -30,6 +30,48 @@
       <artifactId>snap-core</artifactId>
       <version>7.0.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.esa.s1tbx</groupId>
+      <artifactId>s1tbx-io</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.esa.s1tbx</groupId>
+      <artifactId>s1tbx-op-sar-processing</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.esa.s1tbx</groupId>
+      <artifactId>s1tbx-op-insar</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.esa.s1tbx</groupId>
+      <artifactId>s1tbx-op-calibration</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.esa.s1tbx</groupId>
+      <artifactId>s1tbx-op-sentinel1</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.esa.s1tbx</groupId>
+      <artifactId>s1tbx-op-utilities</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.gdal</groupId>
+      <artifactId>gdal</artifactId>
+      <version>3.0.0</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
+      <groupId>org.esa.snap</groupId>
+      <artifactId>snap-engine-utilities</artifactId>
+      <version>7.0.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -80,9 +122,13 @@
 
   <repositories>
     <repository>
+      <id>central</id>
+      <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
       <id>snap-repo-public</id>
       <name>Public Maven Repository for SNAP</name>
-      <url>http://nexus.senbox.net/nexus/content/repositories/public/</url>
+      <url>https://snap-build-server.tilaa.cloud/nexus/repository/snap-maven-public/</url>
       <releases>
         <enabled>true</enabled>
         <checksumPolicy>warn</checksumPolicy>
@@ -98,7 +144,7 @@
     <pluginRepository>
       <id>snap-repo-public</id>
       <name>Public Maven Repository for SNAP</name>
-      <url>http://nexus.senbox.net/nexus/content/repositories/public/</url>
+      <url>https://snap-build-server.tilaa.cloud/nexus/repository/snap-maven-public/</url>
       <releases>
         <enabled>true</enabled>
         <checksumPolicy>warn</checksumPolicy>
