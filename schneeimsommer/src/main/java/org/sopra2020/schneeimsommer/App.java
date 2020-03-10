@@ -13,27 +13,6 @@ public class App
 {
   /*  public static void main (String[] args)
     {
-        String inputPath =
-        if (args.length < 2)
-        {
-            System.out.println("parameter usage: <input-file> <output-file>");
-            return;
-        }
-
-        // Get arguments
-       // String inputPath = args[0];
-        //String outputPath = args[1];
-
-        try
-        {
-            // Pass arguments to actual program code
-            run(inputPath, outputPath);
-        }
-        catch (IOException e)
-        {
-            System.out.println("error: " + e.getMessage());
-        }
-
         Product product = null;
         system.out.println ("Baender:" + product.getBandNames());
         try
@@ -48,15 +27,8 @@ public class App
 
         public static void main(String[] args)
         {
-           if (args.length < 2)
-           {
-                System.out.println("parameter usage: <input-file> <output-file>");
-                return;
-            }
-
-            // Get arguments
-            String inputPath = args[0];
-            String outputPath = args[1];
+            String inputPath = "C:/Users/Tatjana/Desktop/S1A_IW_GRDH_1SDV_20191224T054207_20191224T054232_030486_037D8C_8E6A.zip";
+            String outputPath = "C:/Users/Tatjana/Desktop/Neues_Bild";
 
             try
             {
@@ -73,13 +45,14 @@ public class App
                 throws IOException
         {
             // Read the product (note that only 'nodes' are read, not the entire data!)
-            Product product = ProductIO.readProduct(inputPath);
+            Product product = ProductIO.readProduct(new File(inputPath));
 
             // Get the scene width
             int w = product.getSceneRasterWidth();
 
             // Get the scene height
             int h = product.getSceneRasterHeight();
+
 
             // Get the "low" band
             Band lowBand = product.getBand("radiance_6");
