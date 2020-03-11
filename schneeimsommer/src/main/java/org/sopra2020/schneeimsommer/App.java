@@ -6,16 +6,25 @@ import org.esa.snap.core.dataio.ProductIO;
 import org.esa.snap.core.datamodel.Product;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import com.bc.ceres.core.PrintWriterProgressMonitor;
 import org.esa.snap.core.datamodel.Band;
 import org.esa.snap.core.datamodel.ProductData;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static jdk.nashorn.internal.objects.NativeMath.max;
 
@@ -66,7 +75,7 @@ public class App
 
             // Get arguments
             String inputPath = "C:\\Users\\Lennart\\Downloads\\S1B_IW_GRDH_1SDV_20200302T171606_20200302T171631_020516_026E05_DC99.zip";
-            String outputPath = "C:\\temp\\test";
+            String outputPath = "C:\\temp\\";
 
             try
             {
@@ -80,12 +89,22 @@ public class App
         }
 
         public static void writeData(String inputPath,String outputPath)throws IOException {
+
+
+
+
+
+
+
+
+
+
             Product product = ProductIO.readProduct(inputPath);
             Band band = product.getBand("Amplitude_VH");
             MultiLevelImage image = band.getGeophysicalImage();
             Rectangle rechteck = new Rectangle(10550, 7380, 1000, 600);
             Raster raster = image.getData(rechteck);
-            FileImageOutputStream outputStream = new FileImageOutputStream(new File(outputPath));
+            //FileImageOutputStream outputStream = new FileImageOutputStream(new File("."));
             float[] Pixels = new float[1000];//länge
 
             //For each pixelreihe
@@ -98,7 +117,11 @@ public class App
 
                 raster.getPixels(10550, 7380+i, 1000, 1, Pixels);
               //  outputStream.writeByte(Pixels[i]);
-                outputStream.writeFloat(Pixels[i]);
+                //outputStream.writeFloat(Pixels[i]);
+
+
+
+                //outputStream.write(122);
                 //System.out.println(Arrays.toString(Pixels));#
 
                 if(allmin>Floats.min(Pixels)){
@@ -112,7 +135,33 @@ public class App
                // Arrays.stream(Pixels).average().orElse(Double.NaN);
 
             }
+
+
+
+            byte[] PixByt= new byte[Pixels.length];
+            for(int i=0;i<Pixels.length;i++){
+                PixByt[i]=(byte)((Pixels[i]-allmin)/(allmax-allmin)*255);
+            }
+
             System.err.println(allmax+"  "+allmin);
+
+/*            byte[] PixInt=new byte[Pixels.length];
+            for( int j=0; i<Pixels.length;j++){
+
+                PixInt[j] =(byte) Pixels[j];
+            }*/
+
+            //Stream intstream = new Stream<Integer>();
+
+           // IntStream stream = Arrays.stream(PixInt);
+
+
+            try {
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(PixByt));
+                ImageIO.write(bufferedImage, "png", new File("out.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             
 
         }
