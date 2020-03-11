@@ -1,4 +1,4 @@
-package org.sopra2020.schneeimsommer;
+ package org.sopra2020.schneeimsommer;
 
 import com.bc.ceres.glevel.MultiLevelImage;
 import com.google.common.primitives.Floats;
