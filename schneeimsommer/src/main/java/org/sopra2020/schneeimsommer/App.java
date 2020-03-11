@@ -158,8 +158,15 @@ public class App
 
             try {
                 BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(PixByt));
-                ImageIO.write(bufferedImage, "png", new File("out.png"));
-            } catch (IOException e) {
+
+
+                File OutputFile= new File(outputPath+"out");
+
+
+
+                int test = 2;
+                ImageIO.write(bufferedImage, "png", OutputFile);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             
