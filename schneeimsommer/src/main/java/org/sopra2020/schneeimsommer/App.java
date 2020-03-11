@@ -33,7 +33,6 @@ public class App
         // Get arguments
        // String inputPath = args[0];
         //String outputPath = args[1];
-
         try
         {
             // Pass arguments to actual program code
