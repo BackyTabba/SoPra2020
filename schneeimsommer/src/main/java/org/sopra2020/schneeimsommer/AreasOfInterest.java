@@ -51,21 +51,21 @@ public class AreasOfInterest
 
     public void setGeoposSki1 (GeoPos geoposSki1)
     {
-        geoposSki1 = geoposSki1;
+        this.geoposSki1 = geoposSki1;
     }
 
     public void setGeoposSki2 (GeoPos geoposSki2)
     {
-        geoposSki2 = geoposSki2;
+        this.geoposSki2 = geoposSki2;
     }
 
     public void setGeoposRef1 (GeoPos geoposRef1)
     {
-        geoposRef1 = geoposRef1;
+        this.geoposRef1 = geoposRef1;
     }
 
     public void setGeoposRef2 (GeoPos geoposRef2)
     {
-        geoposRef2 = geoposRef2;
+        this.geoposRef2 = geoposRef2;
     }
 }
