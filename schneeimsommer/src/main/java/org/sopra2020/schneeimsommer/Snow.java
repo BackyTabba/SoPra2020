@@ -3,7 +3,7 @@ package org.sopra2020.schneeimsommer;
 public class Snow
 {
     private float worthOfGrey;
-    private boolean isSnow;
+    private boolean isRealSnow;
     private int [] rgb = new int [3];
 
     public float getWorthOfGrey ()
@@ -13,7 +13,7 @@ public class Snow
 
     public boolean getIsSnow ()
     {
-        return isSnow;
+        return isRealSnow;
     }
 
     public int[] getRgb ()
@@ -26,9 +26,9 @@ public class Snow
         this.worthOfGrey = worthOfGrey;
     }
 
-    public void setSnow (boolean isSnow)
+    public void setRealSnow (boolean isSnow)
     {
-        this.isSnow = isSnow;
+        this.isRealSnow = isSnow;
     }
 
     public void setRgb (int [] rgb)
