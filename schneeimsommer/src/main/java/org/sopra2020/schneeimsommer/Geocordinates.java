@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class Geocordinates
 {
-    /*
+    /**
         @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geoPos   The geoposition of the AOI
         @return PixelPos    The position of the coordinates on the picture
@@ -22,7 +22,7 @@ public class Geocordinates
     }
 
 
-    /*
+    /**
         @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geopos1   One of the angles of the rectangle for calculation of the rectangle
         @param geopos2    The other one of the angles of the rectangle for calculation of the rectangle
@@ -37,7 +37,7 @@ public class Geocordinates
     }
 
 
-    /*
+    /**
         @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geopos1   One of the angles of the rectangle for calculation of the rectangle
         @param width    The width of the rectangle
@@ -52,7 +52,7 @@ public class Geocordinates
     }
 
 
-    /*
+    /**
         @param pixpos1  One of the angles of the rectangle for calculation of the rectangle
         @param pixpos2  The other one of the angles of the rectangle for calculation of the rectangle
         @return Rectangle   The calculated rectangle
@@ -64,8 +64,7 @@ public class Geocordinates
     }
 
 
-    /*
-        @param product  The product with the Metadata of the Area of Interest (AOI)
+    /**
         @param pixpos1   One of the angles of the rectangle for calculation of the rectangle
         @param width    The width of the rectangle
         @param height   The height of the rectangle
