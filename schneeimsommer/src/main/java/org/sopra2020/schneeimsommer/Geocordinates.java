@@ -71,7 +71,7 @@ public class Geocordinates
         @param height   The height of the rectangle
         @return Rectangle   The calculated rectangle
     */
-    
+
     public Rectangle createRectangle (PixelPos pixpos1, int width, int height)
     {
         return new Rectangle ((int) pixpos1.x, (int) pixpos1.y, width, height);
