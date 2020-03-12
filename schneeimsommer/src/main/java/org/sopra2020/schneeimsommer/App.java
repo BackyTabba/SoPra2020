@@ -2,8 +2,9 @@ package org.sopra2020.schneeimsommer;
 
 import com.bc.ceres.glevel.MultiLevelImage;
 import com.google.common.primitives.Floats;
+import org.esa.s1tbx.io.imageio.ImageIOReader;
 import org.esa.snap.core.dataio.ProductIO;
-import org.esa.snap.core.datamodel.Product;
+import org.esa.snap.core.datamodel.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,14 +12,15 @@ import java.awt.image.Raster;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import com.bc.ceres.core.PrintWriterProgressMonitor;
-import org.esa.snap.core.datamodel.Band;
-import org.esa.snap.core.datamodel.ProductData;
+import org.esa.snap.core.util.ProductUtils;
+import org.esa.snap.dataio.envisat.DataTypes;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,14 +93,6 @@ public class App
         public static void writeData(String inputPath,String outputPath)throws IOException {
 
 
-
-
-
-
-
-
-
-
             Product product = ProductIO.readProduct(inputPath);
             Band band = product.getBand("Amplitude_VH");
             MultiLevelImage image = band.getGeophysicalImage();
@@ -109,41 +103,46 @@ public class App
 
             //For each pixelreihe
 
-           // float allavg=Pixels[];
-            float allmax=0;
-            float allmin=10000;
+            // float allavg=Pixels[];
+            float allmax = 0;
+            float allmin = 10000;
             for (int i = 0; i < raster.getHeight(); i++) {
 
-
-                raster.getPixels(10550, 7380+i, 1000, 1, Pixels);
-              //  outputStream.writeByte(Pixels[i]);
+                raster.getPixels(10550, 7380 + i, 1000, 1, Pixels);
+                //  outputStream.writeByte(Pixels[i]);
                 //outputStream.writeFloat(Pixels[i]);
-
 
 
                 //outputStream.write(122);
                 //System.out.println(Arrays.toString(Pixels));#
 
-                if(allmin>Floats.min(Pixels)){
-                    allmin=Floats.min(Pixels);
+                if (allmin > Floats.min(Pixels)) {
+                    allmin = Floats.min(Pixels);
                 }
-                if(allmax<Floats.max(Pixels)){
-                    allmax=Floats.max(Pixels);
+                if (allmax < Floats.max(Pixels)) {
+                    allmax = Floats.max(Pixels);
                 }
-                System.out.println(Floats.max(Pixels)+" "+Floats.min(Pixels));
+                System.out.println(Floats.max(Pixels) + " " + Floats.min(Pixels));
 
-               // Arrays.stream(Pixels).average().orElse(Double.NaN);
+                // Arrays.stream(Pixels).average().orElse(Double.NaN);
 
             }
 
 
 
-            byte[] PixByt= new byte[Pixels.length];
-            for(int i=0;i<Pixels.length;i++){
-                PixByt[i]=(byte)((Pixels[i]-allmin)/(allmax-allmin)*255);
+
+
+            byte[] PixByt = new byte[Pixels.length];
+
+            int[] PixInt = new int[Pixels.length];
+            for (int i = 0; i < Pixels.length; i++) {
+                PixByt[i] = (byte) ((Pixels[i] - allmin) / (allmax - allmin) * 255);
+                PixInt[i] = (int) ((Pixels[i] - allmin) / (allmax - allmin) * 255);
             }
 
-            System.err.println(allmax+"  "+allmin);
+            System.err.println(allmax + "  " + allmin);
+
+
 
 /*            byte[] PixInt=new byte[Pixels.length];
             for( int j=0; i<Pixels.length;j++){
@@ -153,25 +152,48 @@ public class App
 
             //Stream intstream = new Stream<Integer>();
 
-           // IntStream stream = Arrays.stream(PixInt);
+            // IntStream stream = Arrays.stream(PixInt);
 
 
             try {
-                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(PixByt));
+
+                product.getRasterDataNodes();
+                PrintWriterProgressMonitor pm = new PrintWriterProgressMonitor(System.out);
+                RasterDataNode rdn = product.getRasterDataNode("Amplitude_VH");
+                //(RasterDataNode[])product.getRasterDataNodes().toArray()
+
+                Band newBand = new Band("output", ProductData.TYPE_INT32, 1000, 1);
+                // newBand.setDataElems(raster.getget)
+                ProductData.Int newProductData = new ProductData.Int(PixInt.length);
+                newProductData.setElems(PixInt);
+
+                newBand.setData(newProductData);
 
 
-                File OutputFile= new File(outputPath+"out");
+                ImageInfo imageInfo = ProductUtils.createImageInfo(new RasterDataNode[]{newBand}, true, pm);
+                BufferedImage bi2 = ProductUtils.createRgbImage(new RasterDataNode[]{newBand}, imageInfo, pm);
 
+
+                //         BufferedImage bi = new BufferedImage(raster.getWidth(),raster.getHeight(),BufferedImage.TYPE_INT_RGB);
+                // bi.setData(raster);
+
+                //               ByteArrayInputStream BAISPixByt = new ByteArrayInputStream(PixByt);
+//                BufferedImage bufferedImage = ImageIO.read(BAISPixByt);
+
+
+                File OutputFile = new File(outputPath + "out.png");
 
 
                 int test = 2;
-                ImageIO.write(bufferedImage, "png", OutputFile);
+                ImageIO.write(bi2, "png", OutputFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
 
         }
+            
+
+
         private float avg(Float[] f){
             float sum=0;
         for(float a : f){
