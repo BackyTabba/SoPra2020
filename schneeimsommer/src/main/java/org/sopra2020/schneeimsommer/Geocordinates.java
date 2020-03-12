@@ -16,21 +16,21 @@ public class Geocordinates {
         GeoCoding geoCoding = product.getSceneGeoCoding();
         return geoCoding.getPixelPos(geoPos, null);
     }
-    public static Rectangle createRectangle(Product product, GeoPos geopos1, GeoPos geopos2) {
+    public Rectangle createRectangle(Product product, GeoPos geopos1, GeoPos geopos2) {
         PixelPos pixpos1 = reference(product, geopos1);
         PixelPos pixpos2 = reference(product, geopos2);
         return new Rectangle((int) pixpos1.x, (int) pixpos1.y, (int) pixpos2.x - (int) pixpos1.x, (int) pixpos2.y - (int) pixpos1.y);
     }
 
-    public static Rectangle createRectangle(Product product, GeoPos geopos1, int width, int height) {
+    public Rectangle createRectangle(Product product, GeoPos geopos1, int width, int height) {
         PixelPos pixpos1 = reference(product, geopos1);
         return new Rectangle((int) pixpos1.x, (int) pixpos1.y, width, height);
     }
 
-    public static Rectangle createRectangle(PixelPos pixpos1, PixelPos pixpos2) {
+    public Rectangle createRectangle(PixelPos pixpos1, PixelPos pixpos2) {
         return new Rectangle((int) pixpos1.x, (int) pixpos1.y, (int) pixpos2.x - (int) pixpos1.x, (int) pixpos2.y - (int) pixpos1.y);
     }
-    public static Rectangle createRectangle(PixelPos pixpos1, int width, int height) {
+    public Rectangle createRectangle(PixelPos pixpos1, int width, int height) {
        return new Rectangle((int) pixpos1.x, (int) pixpos1.y, width, height);
     }
 }
