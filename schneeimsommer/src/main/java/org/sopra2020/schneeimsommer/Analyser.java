@@ -12,6 +12,7 @@ public class Analyser {
     private float[][] winterData;
     private float[][] summerData;
     private Boolean[][] snowMask;
+    private Boolean isSnowing;
     /*
 
      */
@@ -21,24 +22,24 @@ public class Analyser {
     Boolean[][] snowMask = new Boolean[winterData.length] [winterData[0].length];
         for (int i=0;i<snowMask.length;i++){
             for (int j=0; j<snowMask[0].length; j++){
-                if(winterData[i][j]<=maxSnow && winterData[i][j]>=minSnow
-                        && summerData[i][j] > maxSnow && summerData[i][j]<minSnow){
+                if(isSnow(winterData[i][j])==true && isSnow(summerData[i][j])== false){
                     snowMask[i][j]=true;
                 }else snowMask[i][j] = false;
         }
     }
+    }
 
     /**
      *
-     * @param 2-dimansional array to search the max value
-     * @return returns the max value of the given array
+     * @param data
+     * @return
      */
     public float getMax(float[][] data){
         float max=Float.MIN_VALUE;
-        for(int i=0;i<data.length;i++){
+        for(int i=0; i < data.length; i++){
             for (int j=0; j < data[0].length; j++) {
-                if(data[i][j]>max){
-                    max=data[i][j];
+                if(data[i][j] > max){
+                    max = data[i][j];
                 }
             }
         }
@@ -95,17 +96,32 @@ public class Analyser {
         return realSnow;
     }
 
+    /**
+     *
+     * @return
+     */
     private Snow[][] colorSnow(){
 
-    private Snow[winterData.length] [winterData[0].length] snow = new Snow[][];
+        Snow[][] snow = new Snow[winterData.length] [winterData[0].length];
 
-    for (int i=0;i<snow.length;i++){
-        for (int j=0; j<snow[0].length; j++){
-
-        }
+        for (int i=0;i<snow.length;i++){
+            for (int j=0; j<snow[0].length; j++){
+                if (isSnow(winterData[i][j])==true) {
+                    //Kein Schnee
+                }else if(isSnowing==true) {
+                    //Echtschnee
+                }else{
+                    //Kunstschnee
+                }
+            }
         }
     }
-    }
+
+    /**
+     *
+     * @param f
+     * @return
+     */
     private boolean isSnow(float f){
         if(f<=maxSnow && f>=minSnow){
         return true;
