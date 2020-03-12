@@ -6,7 +6,7 @@ import org.esa.snap.core.datamodel.PixelPos;
 import org.esa.snap.core.datamodel.Product;
 import java.awt.*;
 
-public class Geocordinates
+public class Geocoordinates
 {
     /**
         @param product  The product with the Metadata of the Area of Interest (AOI)
