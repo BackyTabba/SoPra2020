@@ -65,7 +65,7 @@ public class App
             }*/
 
             // Get arguments
-            String inputPath = "C:\\Users\\Lennart\\Downloads\\S1B_IW_GRDH_1SDV_20200302T171606_20200302T171631_020516_026E05_DC99.zip";
+            String inputPath = "C:\\Users\\adria\\Downloads\\S1A_IW_GRDH_1SDV_2019.07.31_SOMMER.zip";
             String outputPath = "C:\\temp\\test";
 
             try
