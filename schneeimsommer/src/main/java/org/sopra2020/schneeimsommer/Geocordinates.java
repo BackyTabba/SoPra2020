@@ -29,6 +29,7 @@ public class Geocordinates
     {
         return new Rectangle ((int) pixpos1.x, (int) pixpos1.y, (int) pixpos2.x - (int) pixpos1.x, (int) pixpos2.y - (int) pixpos1.y);
     }
+    
     public Rectangle createRectangle (PixelPos pixpos1, int width, int height)
     {
         return new Rectangle ((int) pixpos1.x, (int) pixpos1.y, width, height);
