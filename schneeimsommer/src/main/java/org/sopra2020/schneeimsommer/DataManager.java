@@ -48,13 +48,17 @@ public class DataManager {
      */
     public float[][] extractData(Product product, Rectangle rectangle){
         Band band = product.getBand("Amplitude_VH"); //Anpassen für Funktionserweiterungen
-        MultiLevelImage image = band.getGeophysicalImage();
-        Raster raster = image.getData(rectangle);
+        // MultiLevelImage image = band.getGeophysicalImage();
+        // Raster raster = band.getData(rectangle);
 
         float[][]pixfl= new float[rectangle.height][rectangle.width];
 
         for(int i =0;i<rectangle.height;i++) {
-            pixfl[i] = raster.getPixels(rectangle.x, rectangle.y+i, rectangle.width, 1, (float[]) null);
+            try {
+                pixfl[i] = band.readPixels(rectangle.x, rectangle.y+rectangle.height-i, rectangle.width, 1, (float[]) null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return pixfl;
