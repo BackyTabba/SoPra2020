@@ -8,6 +8,13 @@ import java.awt.*;
 
 public class Geocoordinates
 {
+    private Product product;
+
+    public Geocoordinates (Product product)
+    {
+        this.product = product;
+    }
+
     /**
         @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geoPos   The geoposition of the AOI
