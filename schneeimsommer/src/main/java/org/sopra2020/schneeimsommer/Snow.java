@@ -12,9 +12,14 @@ public class Snow
         return worthOfGrey;
     }
 
-    public boolean getIsSnow ()
+    public boolean getIsRealSnow ()
     {
         return isRealSnow;
+    }
+
+    public boolean GetIsSnowAtAll ()
+    {
+        return isSnowAtAll;
     }
 
     public int[] getRgb ()
@@ -27,21 +32,18 @@ public class Snow
         this.worthOfGrey = worthOfGrey;
     }
 
-    public void setRealSnow (boolean isSnow)
+    public void setRealSnow (boolean isRealSnow)
     {
-        this.isRealSnow = isSnow;
+        this.isRealSnow = isRealSnow;
+    }
+
+    public void SetIsSnowAtAll (boolean isSnowAtAll)
+    {
+        this.isSnowAtAll = isSnowAtAll;
     }
 
     public void setRgb (int [] rgb)
     {
         this.rgb = rgb;
-    }
-
-    public void SetIsSnowatAll(boolean f){
-        this.isSnowAtAll=f;
-    }
-
-    public boolean GetIsSnowAtAll() {
-        return isSnowAtAll;
     }
 }
