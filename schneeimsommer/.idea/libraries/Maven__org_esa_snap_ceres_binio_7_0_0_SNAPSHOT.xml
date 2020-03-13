@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.esa.snap:ceres-binio:7.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/snap/ceres-binio/7.0.0-SNAPSHOT/ceres-binio-7.0.0-20190717.150613-216.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/snap/ceres-binio/7.0.0-SNAPSHOT/ceres-binio-7.0.0-20190717.150613-216-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/snap/ceres-binio/7.0.0-SNAPSHOT/ceres-binio-7.0.0-20190717.150613-216-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

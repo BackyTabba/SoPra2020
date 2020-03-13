@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.esa.snap:snap-geotiff:7.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/snap/snap-geotiff/7.0.0-SNAPSHOT/snap-geotiff-7.0.0-20190717.151104-199.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/snap/snap-geotiff/7.0.0-SNAPSHOT/snap-geotiff-7.0.0-20190717.151104-199-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/snap/snap-geotiff/7.0.0-SNAPSHOT/snap-geotiff-7.0.0-20190717.151104-199-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
