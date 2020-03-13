@@ -121,7 +121,7 @@ public class Analyser {
     }
 
     /**
-     *
+     * Makes the decision if a pixel is snow at all and if it is real or fake snow.
      * @return a twodimensional snowarray with special color to show at the final results
      */
     private Snow[][] colorSnow(){
@@ -130,13 +130,14 @@ public class Analyser {
 
         for (int i=0;i<snow.length;i++){
             for (int j=0; j<snow[0].length; j++){
+                snow[i][j].SetIsSnowAtAll(snowMask[i][j]);
                 snow[i][j].setWorthOfGrey(winterData[i][j]);
              //   snow[i][j].setRgb( );             RGB Werte müssen noch gesetzt werden.
                 //   Entweder über eine Umrechnung aus den Graustufen oder über die Farbe fürs Bild.
-                if (isSnow(winterData[i][j])==true) {
+                if (snow[i][j].GetIsSnowAtAll()==false) {
                     //Kein Schnee
                     System.err.println("NoSnow at all");
-                }else if(clean(getQuantitySnow(winterDataRef),getQuantitySnow(summerDataRef))>=5){ // 5 = mistake acceptance
+                }else if(clean(getQuantitySnow(winterDataRef),getQuantitySnow(summerDataRef))>=5){      // 5 = mistake acceptance
                     snow[i][j].setRealSnow(true);// real snow
                 }else{
                     snow[i][j].setRealSnow(false);// fake snow
