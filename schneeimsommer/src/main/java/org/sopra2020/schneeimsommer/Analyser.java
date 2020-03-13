@@ -134,7 +134,7 @@ public class Analyser {
                 snow[i][j].setWorthOfGrey(winterData[i][j]);
              //   snow[i][j].setRgb( );             RGB Werte müssen noch gesetzt werden.
                 //   Entweder über eine Umrechnung aus den Graustufen oder über die Farbe fürs Bild.
-                if (snow[i][j].GetIsSnowAtAll()==false) {
+                if (snow[i][j].getIsSnowAtAll()==false) {
                     //Kein Schnee
                     System.err.println("NoSnow at all");
                 }else if(clean(getQuantitySnow(winterDataRef),getQuantitySnow(summerDataRef))>=5){      // 5 = mistake acceptance
