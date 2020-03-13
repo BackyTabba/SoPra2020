@@ -37,7 +37,7 @@ public class Snow
         this.isRealSnow = isRealSnow;
     }
 
-    public void SetIsSnowAtAll (boolean isSnowAtAll)
+    public void setIsSnowAtAll (boolean isSnowAtAll)
     {
         this.isSnowAtAll = isSnowAtAll;
     }
