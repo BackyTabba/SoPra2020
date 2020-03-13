@@ -75,7 +75,7 @@ public class Analyser
     /**
      * @param data   2-dimensional array to search the min value
      * @return float    the max value of the given array
-     * @see Datamanager
+     * @see DataManager
      */
 
     public float getMax (float[][] data)
@@ -98,7 +98,7 @@ public class Analyser
     /**
      * @param data  2-dimensional array to search the min value
      * @return float    returns the min value of the given array
-     * @see Datamanager
+     * @see DataManager
      */
 
     public float getMin (float[][] data)
@@ -121,7 +121,7 @@ public class Analyser
     /**
      * @param data  the data to be analysed
      * @return int  returns the quantity of snow pixels
-     * @see Datamanager
+     * @see DataManager
      */
 
     public int getQuantitySnow (float[][] data)
