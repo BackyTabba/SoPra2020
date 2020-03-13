@@ -17,7 +17,7 @@ public class Snow
         return isRealSnow;
     }
 
-    public boolean GetIsSnowAtAll ()
+    public boolean getIsSnowAtAll ()
     {
         return isSnowAtAll;
     }
