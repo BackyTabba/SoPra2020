@@ -4,6 +4,7 @@ public class Snow
 {
     private float worthOfGrey;
     private boolean isRealSnow;
+    private boolean isSnowAtAll;
     private int [] rgb = new int [3];
 
     public float getWorthOfGrey ()
@@ -34,5 +35,13 @@ public class Snow
     public void setRgb (int [] rgb)
     {
         this.rgb = rgb;
+    }
+
+    public void SetIsSnowatAll(boolean f){
+        this.isSnowAtAll=f;
+    }
+
+    public boolean GetIsSnowAtAll() {
+        return isSnowAtAll;
     }
 }
