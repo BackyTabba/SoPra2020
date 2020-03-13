@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.esa.s1tbx:s1tbx-op-utilities:7.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/s1tbx/s1tbx-op-utilities/7.0.0-SNAPSHOT/s1tbx-op-utilities-7.0.0-20190712.225157-405.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/s1tbx/s1tbx-op-utilities/7.0.0-SNAPSHOT/s1tbx-op-utilities-7.0.0-20190712.225157-405-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/esa/s1tbx/s1tbx-op-utilities/7.0.0-SNAPSHOT/s1tbx-op-utilities-7.0.0-20190712.225157-405-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
