@@ -78,8 +78,8 @@ public class Output
             }*/
 
         // Get arguments
-        String inputPath = "C:\\Users\\Lennart\\Downloads\\S1B_IW_GRDH_1SDV_20200302T171606_20200302T171631_020516_026E05_DC99.zip";
-        String outputPath = "C:\\temp\\";
+        String inputPath = "D:\\Tatjana\\Documents\\Studium\\SoPra2020\\S1B_IW_GRDH_1SDV_20200302T171606_20200302T171631_020516_026E05_DC99.zip";
+        String outputPath = "D:\\Tatjana\\Desktop\\";
 
         try
         {
@@ -106,7 +106,7 @@ public class Output
         float[] Pixels = new float[rechteck.width];//länge
         float allmax = 0;
         float allmin = 10000;
-        //########################################################################################################
+ //########################################################################################################################################
         // Ermittlung des min und max Wertes
         for (int i = 0; i < rechteck.height; i++) {
 
@@ -120,14 +120,14 @@ public class Output
             }
             System.out.println(Floats.max(Pixels) + " " + Floats.min(Pixels));
         }
-        //#######################################################################################################
+//###########################################################################################################################################
         //Erstellung der Daten in 2D Float
         float[][]Pixfl= new float[rechteck.height][rechteck.width];
         for(int i =0;i<rechteck.height;i++) {
             Pixfl[i] = raster.getPixels(10550, 7380+i, rechteck.width, 1, (float[]) null);
         }
 
-        //############################################################################################################################################################################
+//############################################################################################################################################################################
 
 
         int test2 = 123;
@@ -149,7 +149,7 @@ public class Output
         }
 
         System.err.println(allmax + "  " + allmin);
-//###############################################################################################################
+//###########################################################################################################################################################
         //Abspeichern
 
         try {
@@ -184,7 +184,7 @@ public class Output
     }
 
 
-    //###############################################################################################################
+    //#######################################################################################################################################################
     private float avg(Float[] f){
         float sum=0;
         for(float a : f){
@@ -192,108 +192,4 @@ public class Output
         }
         return sum/f.length;
     }
-
-        /*private static void run(String inputPath, String outputPath)
-                throws IOException
-        {
-            Product product = ProductIO.readProduct(inputPath);
-
-        // Get the "high" band
-        Band hiBand = product.getBand("radiance_10");
-
-        if (hiBand == null)
-        {
-            throw new IOException("hi-band 'radiance_10' not found");
-        }
-
-            // Get the "low" band
-            Band lowBand = product.getBand("radiance_6");
-            int hier = product.getBandNames().length;
-            String hier2 = Arrays.toString(product.getBandNames());
-            product.getSceneRasterHeight();
-            product.getSceneRasterWidth();
-
-
-            // Get the "high" band
-            Band hiBand = product.getBand("Amplitude_VH");
-            MultiLevelImage testimage = hiBand.getGeophysicalImage();
-           // ProductData testdaten = hiBand.getData();
-            Rectangle testrechteck = new Rectangle(10550, 7380,1000,600);
-            Raster testraster = hiBand.getGeophysicalImage().getData(testrechteck);
-            int width = testraster.getWidth();
-            int heigth = testraster.getHeight();
-            int minX = testraster.getMinX();
-            int minY = testraster.getMinY();
-
-
-            String bla = testraster.toString();
-
-            int i=0;
-            Rectangle testrectangle = testraster.getBounds();
-            int a = testrectangle.height;
-            int b = testrectangle.width;
-            System.out.println("b = " + b);
-            System.out.println("a = " + a);
-
-        // Create a buffer for reading a single scan line of the hi-band
-        float[] hiBandPixels = new float[w];
-
-        // Hi/Low-band sum and difference of the NDVI quotient
-        float sum, dif;
-
-        // NDVI value
-        float ndvi;
-
-        // NDVI value in the range 0 to 255
-        int ndviByte;
-
-        // For all scan lines in the product...
-        for (int y = 0; y < h; y++)
-        {
-            // Read low-band pixels for line y
-            lowBand.readPixels(0, y, w, 1, lowBandPixels, new PrintWriterProgressMonitor(System.out));
-
-            // Read hi-band pixels for line y
-            hiBand.readPixels(0, y, w, 1, hiBandPixels, new PrintWriterProgressMonitor(System.out));
-
-            // Compute NDVI for all x
-            for (int x = 0; x < w; x++)
-            {
-                dif = lowBandPixels[x] - hiBandPixels[x];
-                sum = lowBandPixels[x] + hiBandPixels[x];
-
-                if (sum != 0.0F)
-                {
-                    ndvi = dif / sum;
-                }
-
-                else
-                {
-                    ndvi = 0.0F;
-                }
-
-                if (ndvi < 0.0F)
-                {
-                    ndvi = 0.0F;
-                }
-
-                else if (ndvi > 1.0F)
-                {
-                    ndvi = 1.0F;
-                }
-
-                // Convert NDVI to integer in the range 0 to 255
-                ndviByte = (int) (255 * ndvi);
-
-                // write NDVI byte to raw image file
-                outputStream.writeByte(ndviByte);
-            }
-        }
-
-        // close raw image file
-        outputStream.close();
-
-        // Done!
-        System.out.println("OK");
-    }*/
 }
