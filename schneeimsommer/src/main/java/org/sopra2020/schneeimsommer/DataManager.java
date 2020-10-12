@@ -46,19 +46,31 @@ public class DataManager {
      * @param rectangle
      * @return filtered product data by the rectangleframe
      */
-    public float[][] extractData(Product product, Rectangle rectangle){
+    public float[][] extractData(Product product, Rectangle rectangle) throws IOException {
         Band band = product.getBand("Amplitude_VH"); //Anpassen für Funktionserweiterungen
         // MultiLevelImage image = band.getGeophysicalImage();
         // Raster raster = band.getData(rectangle);
 
         float[][]pixfl= new float[rectangle.height][rectangle.width];
 
+        System.out.println("Raster Height:"+band.getRasterHeight()+" RasterWidth:"+band.getRasterWidth());
         for(int i =0;i<rectangle.height;i++) {
             try {
+                System.out.println(
+                        "x:" + rectangle.x
+                        +" y:" + (rectangle.y+rectangle.height-i)
+                        +" width:"+rectangle.width
+                        +" height:"+ 1
+                );
+                // Sollten wir hier band.getPixels() nutzen wie in Output.java?
                 pixfl[i] = band.readPixels(rectangle.x, rectangle.y+rectangle.height-i, rectangle.width, 1, (float[]) null);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // Produkt schließen (graceful) damit es woanders neu geöffnet werden kann
+            product.closeIO();
+            product.dispose();
         }
 
         return pixfl;

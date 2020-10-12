@@ -86,18 +86,17 @@ public class Output
             // Pass arguments to actual program code
             writeData(inputPath, outputPath);
             DataManager dm= new DataManager(inputPath);
-            float[][] asd = dm.extractData(dm.getProduct(),new Rectangle(10550, 7380, 1000, 600));
+            float[][] data = dm.extractData(dm.getProduct(),new Rectangle(10550, 7380, 1000, 600));
             int b = 1;
         }
         catch (Exception e)
         {
             System.out.println("error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     public static void writeData(String inputPath,String outputPath)throws IOException {
-
-
         Product product = ProductIO.readProduct(inputPath);
         Band band = product.getBand("Amplitude_VH");
         MultiLevelImage image = band.getGeophysicalImage();
@@ -122,10 +121,12 @@ public class Output
         }
         //#######################################################################################################
         //Erstellung der Daten in 2D Float
+        System.out.println("Eingang Erstellung der Daten in 2D");
         float[][]Pixfl= new float[rechteck.height][rechteck.width];
         for(int i =0;i<rechteck.height;i++) {
             Pixfl[i] = raster.getPixels(10550, 7380+i, rechteck.width, 1, (float[]) null);
         }
+        System.out.println("Ausgang Erstellung der Daten in 2D");
 
         //############################################################################################################################################################################
 
@@ -136,21 +137,26 @@ public class Output
 //Normalisierung
 
 
-
+        System.out.println("Eingang Normalisierung");
 
         byte[][] PixByt = new byte[Pixfl.length][Pixfl[0].length];
 
         int[][] PixInt = new int[Pixfl.length][Pixfl[1].length];
         for(int j=0;j<Pixfl.length;j++) {
             for (int i = 0; i < Pixfl[0].length; i++) {
-                PixByt[j][i] = (byte) ((Pixfl[j][i] - allmin) / (allmax - allmin) * 255);
-                PixInt[j][i] = (int) ((Pixfl[j][i] - allmin) / (allmax - allmin) * 255);
+                PixByt[j][Pixfl[0].length - i - 1] = (byte) ((Pixfl[j][i] - allmin) / (allmax - allmin) * 255);
+                PixInt[j][Pixfl[0].length - i - 1] = (int) ((Pixfl[j][i] - allmin) / (allmax - allmin) * 255);
             }
         }
 
         System.err.println(allmax + "  " + allmin);
+
+
+        System.out.println("Ausgang Normalisierung");
 //###############################################################################################################
         //Abspeichern
+
+        System.out.println("Eingang Abspeichern");
 
         try {
             PrintWriterProgressMonitor pm = new PrintWriterProgressMonitor(System.out);
@@ -163,10 +169,18 @@ public class Output
                 for(int col=0;col<PixInt[1].length;col++){
                     // PixIntFlat[row*PixInt.length+col]=PixInt[row][col];
                     // System.out.println(row+", "+col);
-                    bi.setRGB(col,row,PixInt[row][col]);
+                    int RGB= PixInt[row][col];
+                    RGB= RGB<<8;
+                    RGB+=PixInt[row][col];
+                    RGB= RGB<<8;
+                    RGB+=PixInt[row][col];
+                    bi.setRGB(col,row,RGB);
                 }
 
             }
+
+            System.out.println("Ausgang Abspeichern");
+
             /*//newProductData.setElems(PixIntFlat);
             newBand.setData(newProductData);
             ImageInfo imageInfo = ProductUtils.createImageInfo(new RasterDataNode[]{newBand}, true, pm);
@@ -181,6 +195,10 @@ public class Output
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Produkt schließen (graceful) damit es woanders neu geöffnet werden kann
+        product.closeIO();
+        product.dispose();
     }
 
 
