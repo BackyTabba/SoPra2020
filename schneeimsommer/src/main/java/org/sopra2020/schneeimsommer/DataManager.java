@@ -42,11 +42,10 @@ public class DataManager {
 
     /**
      *
-     * @param product
      * @param rectangle
      * @return filtered product data by the rectangleframe
      */
-    public float[][] extractData(Product product, Rectangle rectangle) throws IOException {
+    public float[][] extractData(Rectangle rectangle) throws IOException {
         Band band = product.getBand("Amplitude_VH"); //Anpassen für Funktionserweiterungen
         // MultiLevelImage image = band.getGeophysicalImage();
         // Raster raster = band.getData(rectangle);
