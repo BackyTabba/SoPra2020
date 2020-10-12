@@ -32,9 +32,13 @@ import java.util.stream.Stream;
 
 import static jdk.nashorn.internal.objects.NativeMath.max;
 
-public class App
-{
+ /**
+  * The main function which executes the functions and sets the path to the data
+  */
 
+ public class App
+{
+/*
         Product product = null;
         System.out.println ("Baender:" + product.getBandNames());
         try

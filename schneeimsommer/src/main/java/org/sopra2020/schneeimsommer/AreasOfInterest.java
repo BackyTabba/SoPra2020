@@ -2,6 +2,10 @@ package org.sopra2020.schneeimsommer;
 
 import org.esa.snap.core.datamodel.GeoPos;
 
+/**
+ * Saves the Ski - and the Referenceareas with their coordinates (Getter and Setter)
+ */
+
 public class AreasOfInterest
 {
     private String name;

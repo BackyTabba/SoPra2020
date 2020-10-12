@@ -1,8 +1,8 @@
 package org.sopra2020.schneeimsommer;
 
 /**
- * The Analyser gets up to four datasets as twodimensional array. It compares the measurements from summer and winter
- * at two different areas to decide if a white area is winter and if its natural or a by human created product.
+ * The Analyser gets up to four datasets as twodimensional array. It compares the measurements from the reference and the
+ * skiareas in summer and winter to decide if a white area is winter and if its natural or a by human created product.
  */
 
 public class Analyser

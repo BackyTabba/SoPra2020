@@ -6,6 +6,10 @@ import org.esa.snap.core.datamodel.PixelPos;
 import org.esa.snap.core.datamodel.Product;
 import java.awt.*;
 
+/**
+ * Some possibilities to create a rectangle with pixel - or geopositions
+ */
+
 public class Geocoordinates
 {
     private Product product;

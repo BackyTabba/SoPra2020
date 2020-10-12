@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.image.Raster;
 import java.io.IOException;
 
+/**
+ * Loads the data image, gets the coordinates of the rectangle and makes the rectangle with the  float values of the pixels
+ */
+
 public class DataManager
 {
     private String inputPath;
@@ -17,7 +21,6 @@ public class DataManager
     {
         this.inputPath = inputPath;
     }
-
 
     /**
      * If not initialized, it runs loadProduct (inputPath)

@@ -1,5 +1,8 @@
 package org.sopra2020.schneeimsommer;
 
+/**
+ * Colours the real and the fake snow in the output image
+ */
 public class Snow
 {
     private float worthOfGrey;

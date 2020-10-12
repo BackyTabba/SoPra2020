@@ -32,6 +32,10 @@ import java.util.stream.Stream;
 
 import static jdk.nashorn.internal.objects.NativeMath.max;
 
+/**
+ * Creates the output image which shows the real and the fake snow
+ */
+
 public class Output
 {
     /*public static void main (String[] args)
