@@ -30,13 +30,12 @@ public class Geocoordinates
 
 
     /**
-        @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geopos1   One of the angles of the rectangle for calculation of the rectangle
         @param geopos2    The other one of the angles of the rectangle for calculation of the rectangle
         @return Rectangle   The calculated rectangle
     */
 
-    public Rectangle createRectangle (Product product, GeoPos geopos1, GeoPos geopos2)
+    public Rectangle createRectangle (GeoPos geopos1, GeoPos geopos2)
     {
         PixelPos pixpos1 = reference (product, geopos1);
         PixelPos pixpos2 = reference (product, geopos2);
@@ -45,14 +44,13 @@ public class Geocoordinates
 
 
     /**
-        @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geopos1   One of the angles of the rectangle for calculation of the rectangle
         @param width    The width of the rectangle
         @param height   The height of the rectangle
         @return Rectangle   The calculated rectangle
     */
 
-    public Rectangle createRectangle (Product product, GeoPos geopos1, int width, int height)
+    public Rectangle createRectangle (GeoPos geopos1, int width, int height)
     {
         PixelPos pixpos1 = reference (product, geopos1);
         return new Rectangle ((int) pixpos1.x, (int) pixpos1.y, width, height);

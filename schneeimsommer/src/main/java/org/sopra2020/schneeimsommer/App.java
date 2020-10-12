@@ -35,7 +35,7 @@ import static jdk.nashorn.internal.objects.NativeMath.max;
 public class App
 {
 
-        Product product = null;
+     /*   Product product = null;
         System.out.println ("Baender:" + product.getBandNames());
         try
         {
@@ -49,6 +49,35 @@ public class App
 
         public static void main(String[] args)
         {
+            AreasOfInterest aoe = new AreasOfInterest("test",null,null,null,null);
+
+        //Sommerbild
+            // Datamanager
+            DataManager SOdm = new DataManager("PFAD_Sommer");
+            Geocoordinates SOgc = new Geocoordinates(SOdm.getProduct());
+
+            Rectangle SOrect1 = SOgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
+            float[][] SOdata1=SOdm.extractData(SOrect1);
+            Rectangle SOrect2 = SOgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
+            float[][] SOdata2=SOdm.extractData(SOrect2);
+
+
+        //Winterbild
+            // Datamanager
+            DataManager WIdm = new DataManager("PFAD_Winter");
+            Geocoordinates WIgc = new Geocoordinates(WIdm.getProduct());
+            Rectangle WIrect1 = WIgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
+            float[][] WIdata1=WIdm.extractData(WIrect1);
+            Rectangle WIrect2 = WIgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
+            float[][] WIdata2=WIdm.extractData(WIrect2);
+
+
+
+            //Analyze Data
+
+            Analyser Umgebung1 = new Analyser(WIdata1,SOdata1,WIdata2,SOdata2);
+
+
          /*  if (args.length < 2)
            {
                 System.out.println("parameter usage: <input-file> <output-file>");

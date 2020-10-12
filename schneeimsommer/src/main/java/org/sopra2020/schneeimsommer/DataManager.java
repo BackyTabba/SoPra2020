@@ -58,7 +58,7 @@ public class DataManager
      * @return float[][]  filtered product data by the rectangleframe
      */
 
-    public float[][] extractData (Product product, Rectangle rectangle)
+    public float[][] extractData ( Rectangle rectangle)
     {
         Band band = product.getBand ("Amplitude_VH");   //change for functional expansion
         // MultiLevelImage image = band.getGeophysicalImage();
