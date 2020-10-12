@@ -22,9 +22,17 @@ public class Snow
         return isSnowAtAll;
     }
 
-    public int[] getRgb ()
+    public int[] getRgbAsArray()
     {
         return rgb;
+    }
+    public int getRgb(){
+        int SingleRgb =rgb[0];
+        SingleRgb=SingleRgb<<8;
+        SingleRgb+=rgb[1];
+        SingleRgb=SingleRgb<<8;
+        SingleRgb+=rgb[2];
+        return SingleRgb;
     }
 
     public void setWorthOfGrey (float worthOfGrey)
@@ -46,4 +54,5 @@ public class Snow
     {
         this.rgb = rgb;
     }
+
 }

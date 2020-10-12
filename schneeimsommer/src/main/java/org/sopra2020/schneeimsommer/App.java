@@ -73,9 +73,13 @@ public class App
 
 
 
+
             //Analyze Data
 
             Analyser Umgebung1 = new Analyser(WIdata1,SOdata1,WIdata2,SOdata2);
+            Umgebung1.colorSnow();
+            //Umgebung1.clean(Umgebung1.getQuantitySnow(SOdata1),Umgebung1.getQuantitySnow(SOdata2));
+
 
 
          /*  if (args.length < 2)
