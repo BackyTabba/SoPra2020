@@ -69,45 +69,19 @@ public class Output
         }
     }*/
 
-    public static void main(String[] args)
-    {
-         /*  if (args.length < 2)
-           {
-                System.out.println("parameter usage: <input-file> <output-file>");
-                return;
-            }*/
 
-        // Get arguments
-        String inputPath = "C:\\Users\\Lennart\\Downloads\\S1B_IW_GRDH_1SDV_20200302T171606_20200302T171631_020516_026E05_DC99.zip";
-        String outputPath = "C:\\temp\\";
-
-        try
-        {
-            // Pass arguments to actual program code
-            writeData(inputPath, outputPath);
-            DataManager dm= new DataManager(inputPath);
-            float[][] data = dm.extractData(dm.getProduct(),new Rectangle(10550, 7380, 1000, 600));
-            int b = 1;
-        }
-        catch (Exception e)
-        {
-            System.out.println("error: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    public static void writeData(String inputPath,String outputPath)throws IOException {
-        Product product = ProductIO.readProduct(inputPath);
-        Band band = product.getBand("Amplitude_VH");
-        MultiLevelImage image = band.getGeophysicalImage();
-        Rectangle rechteck = new Rectangle(10550, 7380, 1000, 600);
-        Raster raster = image.getData(rechteck);
-        float[] Pixels = new float[rechteck.width];//länge
-        float allmax = 0;
-        float allmin = 10000;
+    public static void writeData(String outputPath,Snow[][] data){
+       // Product product = ProductIO.readProduct(inputPath);
+       // Band band = product.getBand("Amplitude_VH");
+       // MultiLevelImage image = band.getGeophysicalImage();
+       // Rectangle rechteck = new Rectangle(10550, 7380, 1000, 600);
+       // Raster raster = image.getData(rechteck);
+        //float[] Pixels = new float[rechteck.width];//länge
+       // float allmax = 0;
+       // float allmin = 10000;
         //########################################################################################################
         // Ermittlung des min und max Wertes
-        for (int i = 0; i < rechteck.height; i++) {
+       /* for (int i = 0; i < rechteck.height; i++) {
 
             raster.getPixels(10550, 7380 + i, rechteck.width, 1, Pixels);
 
@@ -129,7 +103,7 @@ public class Output
         System.out.println("Ausgang Erstellung der Daten in 2D");
 
         //############################################################################################################################################################################
-
+/*
 
         int test2 = 123;
 
@@ -152,29 +126,25 @@ public class Output
         System.err.println(allmax + "  " + allmin);
 
 
-        System.out.println("Ausgang Normalisierung");
+        System.out.println("Ausgang Normalisierung");*/
 //###############################################################################################################
         //Abspeichern
 
         System.out.println("Eingang Abspeichern");
 
         try {
-            PrintWriterProgressMonitor pm = new PrintWriterProgressMonitor(System.out);
 
-            Band newBand = new Band("output", ProductData.TYPE_INT32, rechteck.width, rechteck.height);
-            ProductData.Int newProductData = new ProductData.Int(PixInt.length*PixInt[1].length);
-            int[] PixIntFlat= new int[PixInt.length*PixInt[1].length];
-            BufferedImage bi = new BufferedImage(rechteck.width,rechteck.height,BufferedImage.TYPE_INT_RGB);
-            for(int row=0;row<PixInt.length;row++){
-                for(int col=0;col<PixInt[1].length;col++){
+          //  PrintWriterProgressMonitor pm = new PrintWriterProgressMonitor(System.out);
+            BufferedImage bi = new BufferedImage(data.length,data[0].length,BufferedImage.TYPE_INT_RGB);
+            //Band newBand = new Band("output", ProductData.TYPE_INT32, rechteck.width, rechteck.height);
+           // ProductData.Int newProductData = new ProductData.Int(PixInt.length*PixInt[1].length);
+            //int[] PixIntFlat= new int[PixInt.length*PixInt[1].length];
+            for(int row=0;row<data.length;row++){
+                for(int col=0;col<data[1].length;col++){
                     // PixIntFlat[row*PixInt.length+col]=PixInt[row][col];
                     // System.out.println(row+", "+col);
-                    int RGB= PixInt[row][col];
-                    RGB= RGB<<8;
-                    RGB+=PixInt[row][col];
-                    RGB= RGB<<8;
-                    RGB+=PixInt[row][col];
-                    bi.setRGB(col,row,RGB);
+
+                    bi.setRGB(col,row,data[col][row].getRgb());
                 }
 
             }
@@ -190,26 +160,23 @@ public class Output
 
 
             File OutputFile = new File(outputPath + "test.png");
-            int test = 2;
             ImageIO.write(bi, "png", OutputFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Produkt schließen (graceful) damit es woanders neu geöffnet werden kann
-        product.closeIO();
-        product.dispose();
+
     }
 
 
     //###############################################################################################################
-    private float avg(Float[] f){
+   /* private float avg(Float[] f){
         float sum=0;
         for(float a : f){
             sum+=a;
         }
         return sum/f.length;
-    }
+    }*/
 
         /*private static void run(String inputPath, String outputPath)
                 throws IOException
