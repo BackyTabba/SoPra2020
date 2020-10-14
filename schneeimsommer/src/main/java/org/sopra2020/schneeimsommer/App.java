@@ -1,36 +1,17 @@
-﻿ package org.sopra2020.schneeimsommer;
+package org.sopra2020.schneeimsommer;
 
 import com.bc.ceres.glevel.MultiLevelImage;
 import com.google.common.primitives.Floats;
-import org.esa.s1tbx.io.imageio.ImageIOReader;
 import org.esa.snap.core.dataio.ProductIO;
-import org.esa.snap.core.datamodel.*;
+import org.esa.snap.core.datamodel.Band;
+import org.esa.snap.core.datamodel.GeoPos;
+import org.esa.snap.core.datamodel.Product;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import com.bc.ceres.core.PrintWriterProgressMonitor;
-import org.esa.snap.core.util.ProductUtils;
-import org.esa.snap.dataio.envisat.DataTypes;
-
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.*;
-import javax.xml.crypto.Data;
+import java.awt.*;
+import java.awt.image.Raster;
 import java.io.File;
-import java.nio.Buffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static jdk.nashorn.internal.objects.NativeMath.max;
+import java.io.IOException;
 
 public class App
 {
@@ -50,37 +31,38 @@ public class App
         public static void main(String[] args)
         {
             try {
-                AreasOfInterest aoe = new AreasOfInterest("test", null, null, null, null);
+                AreasOfInterest aoi = new AreasOfInterest("test",new GeoPos(47.317992,11.862789),new GeoPos(47.315432,11.854120), new GeoPos(47.268126,11.851987 ), new GeoPos(47.265331, 11.828469));
 
                 //Sommerbild
                 // Datamanager
-                DataManager SOdm = new DataManager("PFAD_Sommer");
+                DataManager SOdm = new DataManager("C:\\temp\\S1B_20200711.zip");
                 Geocoordinates SOgc = new Geocoordinates(SOdm.getProduct());
 
-                Rectangle SOrect1 = SOgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
-                float[][] SOdata1 = SOdm.extractData(SOrect1);
-                Rectangle SOrect2 = SOgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
-                float[][] SOdata2 = SOdm.extractData(SOrect2);
+                Rectangle SOrect = SOgc.createRectangle(aoi.getGeoposRef1(), aoi.getGeoposRef2());
+                System.out.println(SOrect);
+                float[][] SOdata1 = SOdm.extractData(SOrect);
+                float[][] SOdata2 = SOdm.extractData(SOrect);
 
 
                 //Winterbild
                 // Datamanager
-                DataManager WIdm = new DataManager("PFAD_Winter");
+                DataManager WIdm = new DataManager("C:\\temp\\S1B_20200206.zip");
                 Geocoordinates WIgc = new Geocoordinates(WIdm.getProduct());
-                Rectangle WIrect1 = WIgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
-                float[][] WIdata1 = WIdm.extractData(WIrect1);
-                Rectangle WIrect2 = WIgc.createRectangle(aoe.getGeoposRef1(), aoe.getGeoposRef2());
-                float[][] WIdata2 = WIdm.extractData(WIrect2);
+                Rectangle WIrect = WIgc.createRectangle(aoi.getGeoposRef1(), aoi.getGeoposRef2());
+                float[][] WIdata1 = WIdm.extractData(WIrect);
+                float[][] WIdata2 = WIdm.extractData(WIrect);
 
 
                 //Analyze Data
 
                 Analyser Umgebung1 = new Analyser(WIdata1, SOdata1, WIdata2, SOdata2);
-                Umgebung1.colorSnow();
+                Snow[][]rueck =Umgebung1.colorSnow();
+                Output.writeData("C:/temp/neu/",rueck);
                 //Umgebung1.clean(Umgebung1.getQuantitySnow(SOdata1),Umgebung1.getQuantitySnow(SOdata2));
 
             }catch(Exception e){
                 System.err.println(e.toString());
+                e.printStackTrace();
 
             }
 
@@ -91,6 +73,7 @@ public class App
             }*/
 
             // Get arguments
+            /*
             String inputPath = "C:\\Users\\adria\\Downloads\\S1A_IW_GRDH_1SDV_2019.07.31_SOMMER.zip";
             String outputPath = "C:\\temp\\test";
 
@@ -102,7 +85,7 @@ public class App
             catch (IOException e)
             {
                 System.out.println("error: " + e.getMessage());
-            }
+            }*/
         }
 
         public static void writeData(String inputPath,String outputPath)throws IOException {

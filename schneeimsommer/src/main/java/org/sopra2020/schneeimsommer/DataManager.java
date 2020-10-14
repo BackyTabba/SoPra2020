@@ -68,7 +68,7 @@ public class DataManager
         float[][]pixfl= new float[rectangle.height][rectangle.width];
          allmax = 0;
          allmin = 10000;
-        float[] Pixels = new float[rectangle.width];
+        // float[] Pixels = new float[rectangle.width];
         
         System.out.println("Raster Height:"+band.getRasterHeight()+" RasterWidth:"+band.getRasterWidth());
         for(int i =0;i<rectangle.height;i++) {
@@ -81,26 +81,25 @@ public class DataManager
                 );
 
 
-                System.out.println(Floats.max(Pixels) + " " + Floats.min(Pixels));
+                // System.out.println(Floats.max(Pixels) + " " + Floats.min(Pixels));
                 // Sollten wir hier band.getPixels() nutzen wie in Output.java?
-                pixfl[i] = band.readPixels(rectangle.x, rectangle.y+rectangle.height-i, rectangle.width, 1, Pixels);
+
+                pixfl[i] = band.readPixels(rectangle.x, rectangle.y+rectangle.height-i, rectangle.width, 1, (float[]) null);
                 
                 if (allmin > Floats.min(pixfl[i])) {
-                    allmin = Floats.min(Pixels);
+                    allmin = Floats.min(pixfl[i]);
                 }
-                if (allmax < Floats.max(Pixels)) {
-                    allmax = Floats.max(Pixels);
+                if (allmax < Floats.max(pixfl[i])) {
+                    allmax = Floats.max(pixfl[i]);
                 }
                 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            // Produkt schließen (graceful) damit es woanders neu geöffnet werden kann
-            product.closeIO();
-            product.dispose();
         }
 
+        // Produkt schließen (graceful) damit es woanders neu geöffnet werden kann
+        product.closeIO();
 
         byte[][] PixByt = new byte[pixfl.length][pixfl[0].length];
 

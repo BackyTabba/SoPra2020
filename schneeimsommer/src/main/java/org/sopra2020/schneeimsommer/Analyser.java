@@ -7,13 +7,14 @@ package org.sopra2020.schneeimsommer;
 
 public class Analyser
 {
-    public final static float minSnow = 0f;  //smallest value for a snow area
-    public final static float maxSnow = 0f;  //biggest value for a snow area
+    public final static float minSnow = 230f;  //smallest value for a snow area
+    public final static float maxSnow = 255f;  //biggest value for a snow area
 
     private float max;  //biggest measurement for a snow area
     private float min;  //smallest measurement for a snow area
     private int quantitySnow;   //quantity of snow pixels
     private float percentSnow;  //percent of snow in the measurement
+    private int il,jl;
     private float[][] winterData;   //measurements from winter
     private float[][] summerData;   //measurements from summer
     private float[][] winterDataRef;   //measurements from winter as reference
@@ -37,12 +38,23 @@ public class Analyser
         this.winterDataRef = winterDataRef;
         this.summerDataRef = summerDataRef;
 
-        snowMask = new Boolean [winterData.length] [winterData[0].length];  //creates a reference if a white pixel is snow or something different
-        for (int i = 0; i < snowMask.length; i++)
+        if(winterData[0].length>summerData[0].length){
+            jl=summerData[0].length;
+        }else{
+            jl=winterData[0].length;
+        }
+        if(winterData.length>summerData.length){
+            il=summerData.length;
+        }else{
+            il=winterData.length;
+        }
+
+        snowMask = new Boolean [il] [jl];  //creates a reference if a white pixel is snow or something different
+        for (int i = 0; i < il; i++)
         {
-            for (int j = 0; j < snowMask[0].length; j++)
+            for (int j = 0; j < jl; j++)
             {
-                if (isSnow (winterData[i][j]) == true && isSnow (summerData[i][j]) == false)
+                if (isSnow (winterData[i][j]) == true&& isSnow (summerData[i][j]) == false)
                 {
                     snowMask[i][j] = true;
                 }
@@ -53,10 +65,10 @@ public class Analyser
             }
         }
 
-        snowMaskRef = new Boolean [winterDataRef.length] [winterDataRef[0].length]; //creates a reference if a white pixel is snow or something different
-        for (int i = 0; i < snowMaskRef.length; i++)
+        snowMaskRef = new Boolean [il] [jl]; //creates a reference if a white pixel is snow or something different
+        for (int i = 0; i < il; i++)
         {
-            for (int j = 0; j < snowMask[0].length; j++)
+            for (int j = 0; j < jl; j++)
             {
                 if (isSnow (winterDataRef[i][j]) == true && isSnow (summerDataRef[i][j]) == false)
                 {
@@ -152,7 +164,7 @@ public class Analyser
         int realSnow = quantityWinterSnow - quantitySummerSnow;
         if (realSnow < 0)
         {
-            System.err.println ("Error: To much snow in summer");
+            System.err.println ("Error: Too much snow in summer");
         }
         return realSnow;
     }
@@ -165,11 +177,12 @@ public class Analyser
 
     public Snow[][] colorSnow()
     {
-        snow = new Snow [winterData.length] [winterData[0].length];
+        snow = new Snow [il] [jl];
         for (int i = 0; i < snow.length; i++)
         {
             for (int j = 0; j < snow[0].length; j++)
             {
+                snow[i][j]=new Snow();
                 snow[i][j].setIsSnowAtAll (snowMask[i][j]);
                 snow[i][j].setWorthOfGrey (winterData[i][j]);
                 //snow[i][j].setRgb( );             RGB Werte müssen noch gesetzt werden.
@@ -177,7 +190,7 @@ public class Analyser
 
                 if (snow[i][j].getIsSnowAtAll() == false)
                 {
-                    System.err.println("No snow at all");   //No snow
+                   //System.err.println("No snow at all");   //No snow
                 }
                 else if (clean (getQuantitySnow(winterDataRef), getQuantitySnow(summerDataRef)) >= 5)   // 5 mistakes are accepted
                 {

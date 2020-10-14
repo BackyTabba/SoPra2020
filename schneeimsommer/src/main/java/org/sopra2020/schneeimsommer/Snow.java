@@ -27,6 +27,19 @@ public class Snow
         return rgb;
     }
     public int getRgb(){
+        if(worthOfGrey!=0){
+            rgb[0]=(int)worthOfGrey;
+            rgb[1]=(int)worthOfGrey;
+            rgb[2]=(int)worthOfGrey;
+        }
+        if(isSnowAtAll==true){
+            rgb[1]=255;
+            rgb[2]=255;
+        }
+        if(isRealSnow==true){
+            rgb[2]=255;
+        }
+
         int SingleRgb =rgb[0];
         SingleRgb=SingleRgb<<8;
         SingleRgb+=rgb[1];

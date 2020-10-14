@@ -140,11 +140,11 @@ public class Output
            // ProductData.Int newProductData = new ProductData.Int(PixInt.length*PixInt[1].length);
             //int[] PixIntFlat= new int[PixInt.length*PixInt[1].length];
             for(int row=0;row<data.length;row++){
-                for(int col=0;col<data[1].length;col++){
+                for(int col=0;col<data[0].length;col++){
                     // PixIntFlat[row*PixInt.length+col]=PixInt[row][col];
                     // System.out.println(row+", "+col);
 
-                    bi.setRGB(col,row,data[col][row].getRgb());
+                    bi.setRGB(row,col,data[row][col].getRgb());
                 }
 
             }
