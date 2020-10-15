@@ -141,8 +141,8 @@ public class Analyser
         }
 
         // Percent of snow in the measurement
-        percentSnow = countSnow / count;
-        percentSnowRef = countSnowRef / countRef;
+        percentSnow = (countSnow / count) * 100;
+        percentSnowRef = (countSnowRef / countRef) * 100;
 
         // Quantity of snow pixels
         quantitySnow = countSnow;
@@ -240,14 +240,16 @@ public class Analyser
      * @return int  the quantity of snow pixels
      */
 
-    public int clean (int quantitySummerSnow, int quantityWinterSnow)
+    public boolean validateData (int quantityWinterSnow, int quantitySummerSnow)
     {
         int realSnow = quantityWinterSnow - quantitySummerSnow;
-        if (realSnow < 0)
+        boolean validation = true;
+        if (realSnow < (-5))
         {
-            //System.err.println ("Error: Too much snow in summer");
+            validation = false;
+            System.err.println ("Error: Too much snow in summer");
         }
-        return realSnow;
+        return validation;
     }
 
 
@@ -258,28 +260,26 @@ public class Analyser
 
     public Snow [][] colorSnow ()
     {
-        snow = new Snow [il][jl];
+        snow = new Snow[il][jl];
+        boolean winterHasMoreSnow = validateData(getQuantitySnow(winterDataRef), getQuantitySnow(summerDataRef));
         for (int i = 0; i < snow.length; i++)
         {
             for (int j = 0; j < snow[0].length; j++)
             {
-                snow [i][j] = new Snow();
+                snow [i][j] = new Snow ();
                 snow[i][j].setIsSnowAtAll (snowMask [i][j]);
                 snow[i][j].setWorthOfGrey (winterData [i][j]);
 
-                if (snow[i][j].getIsSnowAtAll() == false)
+                if (snow[i][j].getIsSnowAtAll())
                 {
-                   //System.err.println("Here isn't snow");
-                }
-                else if (clean (getQuantitySnow (winterDataRef), getQuantitySnow (summerDataRef)) >= 5)
-                {
-                    // The decision if the snow is real snow (5 mistakes are accepted)
-                    snow[i][j].setRealSnow (true);
-                }
-                else
-                {
-                    // The decision if the snow is fake snow
-                    snow[i][j].setRealSnow (false);
+                    if (winterHasMoreSnow == true)
+                    {
+                        snow[i][j].setRealSnow(true);
+                    }
+                    else if (winterHasMoreSnow == false)
+                    {
+                        snow[i][j].setRealSnow(false);
+                    }
                 }
             }
         }

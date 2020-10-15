@@ -126,10 +126,9 @@ public class App
 
             // Putting out the textform
             // Analyser textout = new Analyser (WIdata1, SOdataSki, WIdata2, SOdataRef);
-            System.out.println ("The percent of the snow in the ski area: " + surrounding.getPercentSnow ());
-            System.out.println ("The percent of the snow in the reference area: " + surrounding.getPercentSnowRef ());
-            System.out.println ("The quantity of the fakesnow in the ski area: " + surrounding.getQuantityFalseSnow ());
-            System.out.println ("The percent of the fakesnow in the ski area: " + surrounding.getPercentFalseSnow ());
+            System.out.println ("The percent of the snow in the ski area: " + surrounding.getPercentSnow () + "%");
+            System.out.println ("The percent of the snow in the reference area: " + surrounding.getPercentSnowRef () + "%");
+            System.out.println ("The percent of the fakesnow in the ski area: " + surrounding.getPercentFalseSnow () + "%");
 
             SOdm.exit();
             WIdm.exit();
