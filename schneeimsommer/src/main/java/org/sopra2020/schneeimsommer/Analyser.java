@@ -10,11 +10,11 @@ public class Analyser
 
     private float max;
     private float min;
-    private int quantitySnow;
+    private float quantitySnow;
     private float percentSnow;
     private float percentSnowRef;
     private float quantitySnowRef;
-    private int quantityFalseSnow;
+    private float quantityFalseSnow;
     private float percentFalseSnow;
     private int il, jl, irl, jrl;
     private float[][] winterData;
@@ -35,7 +35,7 @@ public class Analyser
         return percentSnowRef;
     }
 
-    public int getQuantityFalseSnow ()
+    public float getQuantityFalseSnow ()
     {
         return quantityFalseSnow;
     }
@@ -92,7 +92,7 @@ public class Analyser
         {
             irl = winterDataRef.length;
         }
-        int countSnow = 0, count = 0, countRef = 0, countSnowRef = 0;
+        float countSnow = 0, count = 0, countRef = 0, countSnowRef = 0;
 
         // Creates a reference if a white pixel is snow or something different
         snowMask = new Boolean [il][jl];
