@@ -7,14 +7,18 @@ package org.sopra2020.schneeimsommer;
 
 public class Analyser
 {
-    public final static float minSnow = 230f;  //smallest value for a snow area
-    public final static float maxSnow = 255f;  //biggest value for a snow area
+    public final static float minSnow = 0f;  //smallest value for a snow area
+    public final static float maxSnow = 33f;  //biggest value for a snow area
 
     private float max;  //biggest measurement for a snow area
     private float min;  //smallest measurement for a snow area
     private int quantitySnow;   //quantity of snow pixels
     private float percentSnow;  //percent of snow in the measurement
-    private int il,jl;
+    private float percentSnowRef;
+    private float quantitySnowRef;
+    private int quantityFalseSnow;
+    private float percentFalseSnow;
+    private int il,jl,irl,jrl;
     private float[][] winterData;   //measurements from winter
     private float[][] summerData;   //measurements from summer
     private float[][] winterDataRef;   //measurements from winter as reference
@@ -49,8 +53,58 @@ public class Analyser
             il=winterData.length;
         }
 
+        if(winterDataRef[0].length>summerDataRef[0].length){
+            jrl=summerDataRef[0].length;
+        }else{
+            jrl=winterDataRef[0].length;
+        }
+        if(winterDataRef.length>summerDataRef.length){
+            irl=summerDataRef.length;
+        }else{
+            irl=winterDataRef.length;
+        }
+        int countSnow=0,count=0,countRef=0,countSnowRef=0;
         snowMask = new Boolean [il] [jl];  //creates a reference if a white pixel is snow or something different
-        for (int i = 0; i < il; i++)
+        for (int i =0; i< il;i++){//data[j][i]
+            for (int j = 0; j<jl;j++){
+                snowMask[i][j]=false;
+                if(isSnow(winterData[i][j])){snowMask[i][j]=true;}
+                if(isSnow(summerData[i][j])){snowMask[i][j]=false;}
+                if(snowMask[i][j]){countSnow++;}
+                count++;
+            }
+        }
+        snowMaskRef = new Boolean [irl] [jrl];  //creates a reference if a white pixel is snow or something different
+        for (int i =0; i< irl;i++) {//data[j][i]
+            for (int j = 0; j < jrl; j++) {
+                snowMaskRef[i][j]=false;
+                if(isSnow(winterDataRef[i][j])){snowMaskRef[i][j]=true;}
+                if(isSnow(summerDataRef[i][j])){snowMaskRef[i][j]=false;}
+                if(snowMaskRef[i][j]){countSnowRef++;}
+                countRef++;
+            }
+        }
+
+
+
+        percentSnow=countSnow/count;  //percent of snow in the measurement
+        percentSnowRef=countSnowRef/countRef;
+        quantitySnow=countSnow;   //quantity of snow pixels
+        quantitySnowRef=countSnowRef;
+        if(percentSnow>percentSnowRef){
+            quantityFalseSnow =(int)((percentSnow-percentSnowRef)*quantitySnow);
+            percentFalseSnow= quantityFalseSnow /quantitySnow;
+        }else{
+            quantityFalseSnow =0;
+            percentFalseSnow=0;
+        }
+
+
+
+
+
+        
+     /*   for (int i = 0; i < il; i++)
         {
             for (int j = 0; j < jl; j++)
             {
@@ -80,7 +134,7 @@ public class Analyser
                 }
             }
 
-        }
+        }*/
     }
 
 

@@ -31,34 +31,42 @@ public class App
         public static void main(String[] args)
         {
             try {
-                AreasOfInterest aoi = new AreasOfInterest("test",new GeoPos(47.317992,11.862789),new GeoPos(47.315432,11.854120), new GeoPos(47.268126,11.851987 ), new GeoPos(47.265331, 11.828469));
+                //AreasOfInterest aoi = new AreasOfInterest("test",new GeoPos(47.317992,11.862789),new GeoPos(47.315432,11.854120), new GeoPos(47.268126,11.851987 ), new GeoPos(47.265331, 11.828469));
+                AreasOfInterest aoi = new AreasOfInterest("test",new GeoPos(50.119167, -122.896667), new GeoPos(50.105556, -122.958333), new GeoPos(50.114582, -122.934737), new GeoPos(50.113502, -122.937033));
+
+
 
                 //Sommerbild
                 // Datamanager
-                DataManager SOdm = new DataManager("C:\\temp\\S1B_20200711.zip");
+                //DataManager SOdm = new DataManager("C:\\temp\\S1B_20200711.zip");
+                DataManager SOdm = new DataManager("C:\\temp\\S1B_IW_GRDH_1SDV_20200724T142022_20200724T142047_022614_02AEB8_6071.zip");
                 Geocoordinates SOgc = new Geocoordinates(SOdm.getProduct());
+                Rectangle SOrectRef = SOgc.createRectangle(aoi.getGeoposRef1(), aoi.getGeoposRef2());
+                Rectangle SOrectSki = SOgc.createRectangle(aoi.getGeoposSki1(), aoi.getGeoposSki2());
 
-                Rectangle SOrect = SOgc.createRectangle(aoi.getGeoposRef1(), aoi.getGeoposRef2());
-                System.out.println(SOrect);
-                float[][] SOdata1 = SOdm.extractData(SOrect);
-                float[][] SOdata2 = SOdm.extractData(SOrect);
+                float[][] SOdataSki = SOdm.extractData(SOrectSki);
+                float[][] SOdataRef = SOdm.extractData(SOrectRef);
 
 
                 //Winterbild
                 // Datamanager
-                DataManager WIdm = new DataManager("C:\\temp\\S1B_20200206.zip");
+                //DataManager WIdm = new DataManager("C:\\temp\\S1B_20200206.zip");
+                DataManager WIdm = new DataManager("C:\\temp\\S1B_IW_GRDH_1SDV_20200126T142017_20200126T142042_019989_025D07_5276.zip");
                 Geocoordinates WIgc = new Geocoordinates(WIdm.getProduct());
-                Rectangle WIrect = WIgc.createRectangle(aoi.getGeoposRef1(), aoi.getGeoposRef2());
-                float[][] WIdata1 = WIdm.extractData(WIrect);
-                float[][] WIdata2 = WIdm.extractData(WIrect);
+                Rectangle WIrectRef = SOgc.createRectangle(aoi.getGeoposRef1(), aoi.getGeoposRef2());
+                Rectangle WIrectSki = SOgc.createRectangle(aoi.getGeoposSki1(), aoi.getGeoposSki2());
+
+
+                float[][] WIdata1 = WIdm.extractData(WIrectSki);
+                float[][] WIdata2 = WIdm.extractData(WIrectRef);
 
 
                 //Analyze Data
 
-                Analyser Umgebung1 = new Analyser(WIdata1, SOdata1, WIdata2, SOdata2);
+                Analyser Umgebung1 = new Analyser(WIdata1, SOdataSki, WIdata2, SOdataRef);
                 Snow[][]rueck =Umgebung1.colorSnow();
                 Output.writeData("C:/temp/neu/",rueck);
-                //Umgebung1.clean(Umgebung1.getQuantitySnow(SOdata1),Umgebung1.getQuantitySnow(SOdata2));
+                //Umgebung1.clean(Umgebung1.getQuantitySnow(SOdataSki),Umgebung1.getQuantitySnow(SOdata2));
 
             }catch(Exception e){
                 System.err.println(e.toString());
