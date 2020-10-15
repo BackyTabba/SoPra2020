@@ -55,7 +55,7 @@ public class Output
                 }
             }
 
-            File OutputFile = new File (outputPath + "output.png");
+            File OutputFile = new File (outputPath);
             ImageIO.write (bi,"png", OutputFile);
 
             System.out.println ("Output done!");

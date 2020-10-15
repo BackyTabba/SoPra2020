@@ -21,11 +21,88 @@ public class App
     {
         try
         {
+            String winterPath = "";
+            String summerPath = "";
+            String outputPath = "";
+            float coordinatesSkiRULat = 0f;
+            float coordinatesSkiRULon = 0f;
+            float coordinatesSkiLBLat = 0f;
+            float coordinatesSkiLBLon = 0f;
+            float coordinatesRefRULat = 0f;
+            float coordinatesRefRULon = 0f;
+            float coordinatesRefLBLat = 0f;
+            float coordinatesRefLBLon = 0f;
+
+            for (int i = 0; i < args.length; i++)
+            {
+                if (args[i].startsWith ("-winterData"))
+                {
+                    winterPath = args[i].substring (12);
+                };
+                if (args[i].startsWith ("-summerData"))
+                {
+                    summerPath = args[i].substring (12);
+                }
+                if (args[i].startsWith ("-outputData"))
+                {
+                    outputPath = args[i].substring (12);
+                }
+
+                if (args[i].startsWith ("-coordinatesSkiRULat"))
+                {
+                    coordinatesSkiRULat = Float.valueOf (args[i].substring (21));
+                };
+                if (args[i].startsWith ("-coordinatesSkiRULon"))
+                {
+                    coordinatesSkiRULon = Float.valueOf (args[i].substring (21));
+                }
+                if (args[i].startsWith ("-coordinatesSkiLBLat"))
+                {
+                    coordinatesSkiLBLat = Float.valueOf (args[i].substring (21));
+                }
+                if (args[i].startsWith ("-coordinatesSkiLBLon"))
+                {
+                    coordinatesSkiLBLon = Float.valueOf (args[i].substring (21));
+                };
+                if (args[i].startsWith ("-coordinatesRefRULat"))
+                {
+                    coordinatesRefRULat = Float.valueOf (args[i].substring (21));
+                }
+                if (args[i].startsWith ("-coordinatesRefRULon"))
+                {
+                    coordinatesRefRULon = Float.valueOf (args[i].substring (21));
+                }
+                if (args[i].startsWith ("-coordinatesRefLBLat"))
+                {
+                    coordinatesRefLBLat = Float.valueOf (args[i].substring (21));
+                }
+                if (args[i].startsWith ("-coordinatesRefLBLon"))
+                {
+                    coordinatesRefLBLon = Float.valueOf (args[i].substring (21));
+                }
+
+            }
+            if (winterPath == "" || summerPath == "" || outputPath == "")
+            {
+                System.err.println ("Please set the path!");
+                return;
+            }
+            if (coordinatesSkiRULat == 0f || coordinatesSkiRULon == 0f || coordinatesSkiLBLat == 0f || coordinatesSkiLBLon == 0f ||
+                coordinatesRefRULat == 0f || coordinatesRefRULon == 0f || coordinatesRefLBLat == 0f || coordinatesRefLBLon == 0f)
+            {
+                System.err.println ("Please set the coordinates!");
+                return;
+            }
+
             // The input of the area of interest frame coordinates
-            AreasOfInterest aoi = new AreasOfInterest ("frame", new GeoPos (50.119167,-122.896667), new GeoPos (50.105556,-122.958333), new GeoPos (50.114582,-122.934737), new GeoPos(50.113502,-122.937033));
+            AreasOfInterest aoi = new AreasOfInterest ("frame",
+                    new GeoPos (coordinatesSkiRULat, coordinatesSkiRULon),
+                    new GeoPos (coordinatesSkiLBLat, coordinatesSkiLBLon),
+                    new GeoPos (coordinatesRefRULat, coordinatesRefRULon),
+                    new GeoPos (coordinatesRefLBLat, coordinatesRefLBLon));
 
             // The summerdata
-            DataManager SOdm = new DataManager ("C:\\temp\\S1B_IW_GRDH_1SDV_20200724T142022_20200724T142047_022614_02AEB8_6071.zip");
+            DataManager SOdm = new DataManager (summerPath);
             Geocoordinates SOgc = new Geocoordinates (SOdm.getProduct());
             Rectangle SOrectRef = SOgc.createRectangle (aoi.getGeoposRef1(), aoi.getGeoposRef2());
             Rectangle SOrectSki = SOgc.createRectangle (aoi.getGeoposSki1(), aoi.getGeoposSki2());
@@ -34,81 +111,33 @@ public class App
             float [][] SOdataRef = SOdm.extractData (SOrectRef);
 
             //The winterdata
-            DataManager WIdm = new DataManager ("C:\\temp\\S1B_IW_GRDH_1SDV_20200126T142017_20200126T142042_019989_025D07_5276.zip");
+            DataManager WIdm = new DataManager (winterPath);
             Geocoordinates WIgc = new Geocoordinates (WIdm.getProduct());
-            Rectangle WIrectRef = SOgc.createRectangle (aoi.getGeoposRef1(), aoi.getGeoposRef2());
-            Rectangle WIrectSki = SOgc.createRectangle (aoi.getGeoposSki1(), aoi.getGeoposSki2());
+            Rectangle WIrectRef = WIgc.createRectangle (aoi.getGeoposRef1(), aoi.getGeoposRef2());
+            Rectangle WIrectSki = WIgc.createRectangle (aoi.getGeoposSki1(), aoi.getGeoposSki2());
 
             float[][] WIdata1 = WIdm.extractData(WIrectSki);
             float[][] WIdata2 = WIdm.extractData(WIrectRef);
 
             // Analyzing the data and creating the output
-            Analyser surrounding = new Analyser(WIdata1, SOdataSki, WIdata2, SOdataRef);
+            Analyser surrounding = new Analyser (WIdata1, SOdataSki, WIdata2, SOdataRef);
             Snow [][] back = surrounding.colorSnow();
-            Output.writeData ("C:/temp/neu/", back);
+            Output.writeData (outputPath, back);
+
+            // Putting out the textform
+            Analyser textout = new Analyser (WIdata1, SOdataSki, WIdata2, SOdataRef);
+            System.out.println ("The percent of the snow in the ski area: " + textout.getPercentSnow ());
+            System.out.println ("The percent of the snow in the reference area: " + textout.getPercentSnowRef ());
+            System.out.println ("The quantity of the fakesnow in the ski area: " + textout.getQuantityFalseSnow ());
+            System.out.println ("The percent of the fakesnow in the ski area: " + textout.getPercentFalseSnow ());
 
             SOdm.exit();
             WIdm.exit();
-            System.out.println ("App done!");
         }
         catch (Exception e)
         {
             System.err.println (e.toString());
             e.printStackTrace();
         }
-    }
-
-
-    /**
-     * Function for reading the data and writing it in the output
-     * @param inputPath     The input path where the Sentinel - Data is
-     * @param outputPath    The output path where the end picture should be created
-     * @throws IOException  In case the places or the data can't be reached
-     */
-
-    public static void writeData (String inputPath, String outputPath) throws IOException
-    {
-        Product product = ProductIO.readProduct (inputPath);
-        Band band = product.getBand ("Amplitude_VH");
-        MultiLevelImage image = band.getGeophysicalImage();
-        Rectangle rechteck = new Rectangle (10550, 7380, 1000, 600);
-        Raster raster = image.getData(rechteck);
-        FileImageOutputStream outputStream = new FileImageOutputStream (new File (outputPath));
-
-        float [] Pixels = new float [1000];
-        float allmax = 0;
-        float allmin = 10000;
-
-        for (int i = 0; i < raster.getHeight(); i++)
-        {
-            raster.getPixels(10550, 7380+i, 1000, 1, Pixels);
-            outputStream.writeFloat(Pixels[i]);
-
-            if (allmin > Floats.min (Pixels))
-            {
-                allmin = Floats.min (Pixels);
-            }
-            if (allmax < Floats.max (Pixels))
-            {
-                allmax = Floats.max (Pixels);
-            }
-        }
-    }
-
-
-    /**
-     * Calculates the average of the data
-     * @param f     The data where the average should be calculated
-     * @return      The average
-     */
-
-    private float avg (Float [] f)
-    {
-        float sum = 0;
-        for (float a : f)
-        {
-            sum += a;
-        }
-        return sum / f.length;
     }
 }

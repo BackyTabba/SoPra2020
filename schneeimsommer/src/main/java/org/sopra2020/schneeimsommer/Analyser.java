@@ -25,6 +25,26 @@ public class Analyser
     private Boolean[][] snowMaskRef;
     private Snow[][] snow;
 
+    public float getPercentSnow ()
+    {
+        return percentSnow;
+    }
+
+    public float getPercentSnowRef ()
+    {
+        return percentSnowRef;
+    }
+
+    public int getQuantityFalseSnow ()
+    {
+        return quantityFalseSnow;
+    }
+
+    public float getPercentFalseSnow ()
+    {
+        return percentFalseSnow;
+    }
+
 
     /**
      * A function that analyses the snow pixels
@@ -225,7 +245,7 @@ public class Analyser
         int realSnow = quantityWinterSnow - quantitySummerSnow;
         if (realSnow < 0)
         {
-            System.err.println ("Error: Too much snow in summer");
+            //System.err.println ("Error: Too much snow in summer");
         }
         return realSnow;
     }

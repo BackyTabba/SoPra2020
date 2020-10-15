@@ -93,7 +93,7 @@ public class DataManager
             }
         }
 
-        exit();
+        product.closeIO();
 
         byte [][] pixByt = new byte [pixfl.length][pixfl[0].length];
         pixInt = new int [pixfl.length][pixfl[1].length];
