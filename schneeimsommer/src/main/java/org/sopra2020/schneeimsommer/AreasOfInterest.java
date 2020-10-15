@@ -2,6 +2,8 @@ package org.sopra2020.schneeimsommer;
 
 import org.esa.snap.core.datamodel.GeoPos;
 
+// A function to work with the areas of interest, so the summer data, the winter data and the reference data
+
 public class AreasOfInterest
 {
     private String name;

@@ -15,7 +15,9 @@ public class Geocoordinates
         this.product = product;
     }
 
+
     /**
+     * A function to return the product as the frame in form of a rectangle
         @param product  The product with the Metadata of the Area of Interest (AOI)
         @param geoPos   The geoposition of the AOI
         @return PixelPos    The position of the coordinates on the picture
@@ -30,6 +32,7 @@ public class Geocoordinates
 
 
     /**
+     * A function to create a rectangle with geopositions
         @param geopos1   One of the angles of the rectangle for calculation of the rectangle
         @param geopos2    The other one of the angles of the rectangle for calculation of the rectangle
         @return Rectangle   The calculated rectangle
@@ -44,6 +47,7 @@ public class Geocoordinates
 
 
     /**
+     * A function to create a rectangle with one geoposition, the height and the width
         @param geopos1   One of the angles of the rectangle for calculation of the rectangle
         @param width    The width of the rectangle
         @param height   The height of the rectangle
@@ -58,6 +62,7 @@ public class Geocoordinates
 
 
     /**
+     * A function to create a rectangle with two pixel positions
         @param pixpos1  One of the angles of the rectangle for calculation of the rectangle
         @param pixpos2  The other one of the angles of the rectangle for calculation of the rectangle
         @return Rectangle   The calculated rectangle
@@ -70,6 +75,7 @@ public class Geocoordinates
 
 
     /**
+     * A function to create a rectangle with one pixel position, the height and the width
         @param pixpos1   One of the angles of the rectangle for calculation of the rectangle
         @param width    The width of the rectangle
         @param height   The height of the rectangle

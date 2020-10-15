@@ -32,253 +32,37 @@ import java.util.stream.Stream;
 
 import static jdk.nashorn.internal.objects.NativeMath.max;
 
+// The class for creating the output as a picture
+
 public class Output
 {
-    /*public static void main (String[] args)
+    /**
+     * Writes the data in a new output.png in the overgiven path
+     * @param outputPath    The path where the output should be placed
+     * @param data  The data to write in the output
+     */
+
+    public static void writeData (String outputPath, Snow [][] data)
     {
-        String inputPath = "",outputPath="";
-        if (args.length < 2)
-        {
-            System.out.println("parameter usage: <input-file> <output-file>");
-            return;
-        }
-
-        // Get arguments
-       // String inputPath = args[0];
-        //String outputPath = args[1];
         try
         {
-            // Pass arguments to actual program code
-            run(inputPath, outputPath);
-        }
-        catch (IOException e)
-        {
-            System.out.println("error: " + e.getMessage());
-        }
-    }
-
-        Product product = null;
-        System.out.println ("Baender:" + product.getBandNames());
-        try
-        {
-            product = ProductIO.readProduct("test");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }*/
-
-
-    public static void writeData(String outputPath,Snow[][] data){
-       // Product product = ProductIO.readProduct(inputPath);
-       // Band band = product.getBand("Amplitude_VH");
-       // MultiLevelImage image = band.getGeophysicalImage();
-       // Rectangle rechteck = new Rectangle(10550, 7380, 1000, 600);
-       // Raster raster = image.getData(rechteck);
-        //float[] Pixels = new float[rechteck.width];//länge
-       // float allmax = 0;
-       // float allmin = 10000;
-        //########################################################################################################
-        // Ermittlung des min und max Wertes
-       /* for (int i = 0; i < rechteck.height; i++) {
-
-            raster.getPixels(10550, 7380 + i, rechteck.width, 1, Pixels);
-
-            if (allmin > Floats.min(Pixels)) {
-                allmin = Floats.min(Pixels);
-            }
-            if (allmax < Floats.max(Pixels)) {
-                allmax = Floats.max(Pixels);
-            }
-            System.out.println(Floats.max(Pixels) + " " + Floats.min(Pixels));
-        }
-        //#######################################################################################################
-        //Erstellung der Daten in 2D Float
-        System.out.println("Eingang Erstellung der Daten in 2D");
-        float[][]Pixfl= new float[rechteck.height][rechteck.width];
-        for(int i =0;i<rechteck.height;i++) {
-            Pixfl[i] = raster.getPixels(10550, 7380+i, rechteck.width, 1, (float[]) null);
-        }
-        System.out.println("Ausgang Erstellung der Daten in 2D");
-
-        //############################################################################################################################################################################
-/*
-
-        int test2 = 123;
-
-
-//Normalisierung
-
-
-        System.out.println("Eingang Normalisierung");
-
-        byte[][] PixByt = new byte[Pixfl.length][Pixfl[0].length];
-
-        int[][] PixInt = new int[Pixfl.length][Pixfl[1].length];
-        for(int j=0;j<Pixfl.length;j++) {
-            for (int i = 0; i < Pixfl[0].length; i++) {
-                PixByt[j][Pixfl[0].length - i - 1] = (byte) ((Pixfl[j][i] - allmin) / (allmax - allmin) * 255);
-                PixInt[j][Pixfl[0].length - i - 1] = (int) ((Pixfl[j][i] - allmin) / (allmax - allmin) * 255);
-            }
-        }
-
-        System.err.println(allmax + "  " + allmin);
-
-
-        System.out.println("Ausgang Normalisierung");*/
-//###############################################################################################################
-        //Abspeichern
-
-        System.out.println("Eingang Abspeichern");
-
-        try {
-
-          //  PrintWriterProgressMonitor pm = new PrintWriterProgressMonitor(System.out);
-            BufferedImage bi = new BufferedImage(data.length,data[0].length,BufferedImage.TYPE_INT_RGB);
-            //Band newBand = new Band("output", ProductData.TYPE_INT32, rechteck.width, rechteck.height);
-           // ProductData.Int newProductData = new ProductData.Int(PixInt.length*PixInt[1].length);
-            //int[] PixIntFlat= new int[PixInt.length*PixInt[1].length];
-            for(int row=0;row<data.length;row++){
-                for(int col=0;col<data[0].length;col++){
-                    // PixIntFlat[row*PixInt.length+col]=PixInt[row][col];
-                    // System.out.println(row+", "+col);
-
-                    bi.setRGB(row,col,data[row][col].getRgb());
-                }
-
-            }
-
-            System.out.println("Ausgang Abspeichern");
-
-            /*//newProductData.setElems(PixIntFlat);
-            newBand.setData(newProductData);
-            ImageInfo imageInfo = ProductUtils.createImageInfo(new RasterDataNode[]{newBand}, true, pm);
-            BufferedImage bi2 = ProductUtils.createRgbImage(new RasterDataNode[]{newBand}, imageInfo, pm);*/
-
-
-
-
-            File OutputFile = new File(outputPath + "test.png");
-            ImageIO.write(bi, "png", OutputFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-
-    //###############################################################################################################
-   /* private float avg(Float[] f){
-        float sum=0;
-        for(float a : f){
-            sum+=a;
-        }
-        return sum/f.length;
-    }*/
-
-        /*private static void run(String inputPath, String outputPath)
-                throws IOException
-        {
-            Product product = ProductIO.readProduct(inputPath);
-
-        // Get the "high" band
-        Band hiBand = product.getBand("radiance_10");
-
-        if (hiBand == null)
-        {
-            throw new IOException("hi-band 'radiance_10' not found");
-        }
-
-            // Get the "low" band
-            Band lowBand = product.getBand("radiance_6");
-            int hier = product.getBandNames().length;
-            String hier2 = Arrays.toString(product.getBandNames());
-            product.getSceneRasterHeight();
-            product.getSceneRasterWidth();
-
-
-            // Get the "high" band
-            Band hiBand = product.getBand("Amplitude_VH");
-            MultiLevelImage testimage = hiBand.getGeophysicalImage();
-           // ProductData testdaten = hiBand.getData();
-            Rectangle testrechteck = new Rectangle(10550, 7380,1000,600);
-            Raster testraster = hiBand.getGeophysicalImage().getData(testrechteck);
-            int width = testraster.getWidth();
-            int heigth = testraster.getHeight();
-            int minX = testraster.getMinX();
-            int minY = testraster.getMinY();
-
-
-            String bla = testraster.toString();
-
-            int i=0;
-            Rectangle testrectangle = testraster.getBounds();
-            int a = testrectangle.height;
-            int b = testrectangle.width;
-            System.out.println("b = " + b);
-            System.out.println("a = " + a);
-
-        // Create a buffer for reading a single scan line of the hi-band
-        float[] hiBandPixels = new float[w];
-
-        // Hi/Low-band sum and difference of the NDVI quotient
-        float sum, dif;
-
-        // NDVI value
-        float ndvi;
-
-        // NDVI value in the range 0 to 255
-        int ndviByte;
-
-        // For all scan lines in the product...
-        for (int y = 0; y < h; y++)
-        {
-            // Read low-band pixels for line y
-            lowBand.readPixels(0, y, w, 1, lowBandPixels, new PrintWriterProgressMonitor(System.out));
-
-            // Read hi-band pixels for line y
-            hiBand.readPixels(0, y, w, 1, hiBandPixels, new PrintWriterProgressMonitor(System.out));
-
-            // Compute NDVI for all x
-            for (int x = 0; x < w; x++)
+            BufferedImage bi = new BufferedImage (data.length, data[0].length, BufferedImage.TYPE_INT_RGB);
+            for (int row = 0; row < data.length; row++)
             {
-                dif = lowBandPixels[x] - hiBandPixels[x];
-                sum = lowBandPixels[x] + hiBandPixels[x];
-
-                if (sum != 0.0F)
+                for (int col = 0; col < data[0].length; col++)
                 {
-                    ndvi = dif / sum;
+                    bi.setRGB (row, col, data[row][col].getRgb());
                 }
-
-                else
-                {
-                    ndvi = 0.0F;
-                }
-
-                if (ndvi < 0.0F)
-                {
-                    ndvi = 0.0F;
-                }
-
-                else if (ndvi > 1.0F)
-                {
-                    ndvi = 1.0F;
-                }
-
-                // Convert NDVI to integer in the range 0 to 255
-                ndviByte = (int) (255 * ndvi);
-
-                // write NDVI byte to raw image file
-                outputStream.writeByte(ndviByte);
             }
+
+            File OutputFile = new File (outputPath + "output.png");
+            ImageIO.write (bi,"png", OutputFile);
+
+            System.out.println ("Output done!");
         }
-
-        // close raw image file
-        outputStream.close();
-
-        // Done!
-        System.out.println("OK");
-    }*/
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
