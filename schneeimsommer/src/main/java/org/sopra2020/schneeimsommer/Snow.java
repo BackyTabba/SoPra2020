@@ -45,13 +45,13 @@ public class Snow
         if (isSnowAtAll == true)
         {
             rgb [0] = 0;
-            rgb [1] = 255;
+            rgb [1] = 0;
             rgb [2] = 255;
         }
         if (isRealSnow == true)
         {
             rgb [0] = 0;
-            rgb [1] = 0;
+            rgb [1] = 255;
             rgb [2] = 255;
         }
 

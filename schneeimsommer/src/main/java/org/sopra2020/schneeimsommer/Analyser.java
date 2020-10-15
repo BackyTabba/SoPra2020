@@ -69,7 +69,8 @@ public class Analyser
         {
             jl = winterData[0].length;
         }
-        if (winterData.length > summerData.length) {
+        if (winterData.length > summerData.length)
+        {
             il = summerData.length;
         }
         else
