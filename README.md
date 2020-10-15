@@ -1,7 +1,7 @@
 # SoPra2020 - Projekt: Schnee im Sommer <a href="https://www.animierte-gifs.net/cat-skifahren-284.htm"><img src="https://www.animierte-gifs.net/data/media/284/animiertes-skifahren-bild-0058.gif" border="0" alt="animiertes-skifahren-bild-0058" /></a>
 
 # Author names: 
-Adrian Spork, Judith Bresser, Lennart Leemhuis & Tatjana Walter
+Adrian Spork, Judith Bresser, Lennart Leemhuis & Tatjana Melina Walter
 
 # Github-link: 
 https://github.com/BackyTabba/SoPra2020
