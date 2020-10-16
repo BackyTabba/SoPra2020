@@ -21,7 +21,7 @@ java -jar schneeimsommer-1.0-SNAPSHOT.jar "-summerData=PATH SUMMERDATA (zipfile)
 ![Output](https://user-images.githubusercontent.com/61976163/96239892-88d86880-0fa0-11eb-84d3-b241c3f83ae8.jpeg)
 
 # Programmablauf
-![Diagramm](https://user-images.githubusercontent.com/61976163/96240359-19af4400-0fa1-11eb-8288-f7db7e5f6a5a.jpeg)
+![Bild1](https://user-images.githubusercontent.com/61976163/96250353-0014f900-0faf-11eb-93a9-9c5180127fe0.jpg)
 
 # UML
 ![UMLDiagramm](https://user-images.githubusercontent.com/61976163/96239406-f0da7f00-0f9f-11eb-9604-5084f45dcb9e.jpeg)
