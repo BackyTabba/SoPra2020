@@ -13,7 +13,9 @@ Use this as an example for the user inputs in the command line:
 ```
 
 # Input
+![grafik](https://user-images.githubusercontent.com/61976163/96240093-c806b980-0fa0-11eb-9f20-3e553caff4fe.png)
 
+![grafik](https://user-images.githubusercontent.com/61976163/96240152-d94fc600-0fa0-11eb-8e30-3f63d069d5da.png)
 
 # Output
 ![Output](https://user-images.githubusercontent.com/61976163/96239892-88d86880-0fa0-11eb-84d3-b241c3f83ae8.jpeg)
