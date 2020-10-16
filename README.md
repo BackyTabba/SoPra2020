@@ -9,8 +9,7 @@ https://github.com/BackyTabba/SoPra2020
 # User Instructions
 Use this as an example for the user inputs in the command line:
 ```
-"--summerData=D:\Tatjana\Documents\Studium\SoPra2020\S1B_IW_GRDH_1SDV_20200724T142022_20200724T142047_022614_02AEB8_6071.zip" "--winterData=D:\Tatjana\Documents\Studium\SoPra2020\S1B_IW_GRDH_1SDV_20200126T142017_20200126T142042_019989_025D07_5276.zip" "--outputData=D:\Tatjana\Documents\Studium\SoPra2020\output.png" "--coordinatesSkiRULat=50.119167" "--coordinatesSkiRULon=-122.896667" "--coordinatesSkiLBLat=50.105556" "--coordinatesSkiLBLon=-122.958333" "--coordinatesRefRULat=50.114582" "--coordinatesRefRULon=-122.934737" "--coordinatesRefLBLat=50.113502" "--coordinatesRefLBLon=-122.937033"
-```
+java -jar schneeimsommer-1.0-SNAPSHOT.jar "-summerData=PATH SUMMERDATA (zipfile)" "-winterData=PATH WINTERDATA (zipfile)" "-outputData=PATH\output.png" "-coordinatesSkiRULat=Lat(Right bottom, ski area)" "-coordinatesSkiRULon=Lon(Right bottom, ski area)" "-coordinatesSkiLBLat= Lat(Left top, ski area)" "—coordinatesSkiLBLon=Lon(Left top, ski area)" "-coordinatesRefRULat=Lat(right bottom, reference area)" "-coordinatesRefRULon=Lon(right bottom, reference area)" "-coordinatesRefLBLat=Lat(left top, reference area)" "-coordinatesRefLBLon=Lon(left top, reference area)"```
 
 # UML
 
