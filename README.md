@@ -10,6 +10,7 @@ https://github.com/BackyTabba/SoPra2020
 Use this as an example for the user inputs in the command line:
 ```
 java -jar schneeimsommer-1.0-SNAPSHOT.jar "-summerData=PATH SUMMERDATA (zipfile)" "-winterData=PATH WINTERDATA (zipfile)" "-outputData=PATH\output.png" "-coordinatesSkiRULat=Lat(Right bottom, ski area)" "-coordinatesSkiRULon=Lon(Right bottom, ski area)" "-coordinatesSkiLBLat= Lat(Left top, ski area)" "—coordinatesSkiLBLon=Lon(Left top, ski area)" "-coordinatesRefRULat=Lat(right bottom, reference area)" "-coordinatesRefRULon=Lon(right bottom, reference area)" "-coordinatesRefLBLat=Lat(left top, reference area)" "-coordinatesRefLBLon=Lon(left top, reference area)"```
+```
 
 # Input
 ![grafik](https://user-images.githubusercontent.com/61976163/96240093-c806b980-0fa0-11eb-9f20-3e553caff4fe.png)
