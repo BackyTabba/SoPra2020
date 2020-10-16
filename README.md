@@ -13,6 +13,7 @@ Use this as an example for the user inputs in the command line:
 ```
 
 # UML
+![UMLDiagramm](https://user-images.githubusercontent.com/61976163/96239406-f0da7f00-0f9f-11eb-9604-5084f45dcb9e.jpeg)
 
 # Used libraries / frameworks: 
 
