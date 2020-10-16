@@ -28,7 +28,5 @@ java -jar schneeimsommer-1.0-SNAPSHOT.jar "-summerData=S1B_IW_GRDH_1SDV_20200724
 # UML
 ![UMLDiagramm](https://user-images.githubusercontent.com/61976163/96239406-f0da7f00-0f9f-11eb-9604-5084f45dcb9e.jpeg)
 
-# Used libraries / frameworks: 
-
 # License <a href="https://www.animierte-gifs.net/cat-schnee-619.htm"><img src="https://www.animierte-gifs.net/data/media/619/animiertes-schnee-bild-0035.gif" border="0" alt="animiertes-schnee-bild-0035" /></a>
 GPL3
