@@ -32,7 +32,7 @@ public class App
             float coordinatesRefRULon = 0f;
             float coordinatesRefLBLat = 0f;
             float coordinatesRefLBLon = 0f;
-            if(args[0]=="-?"||args[0]=="/?"){
+            if(args[0].equals("-?") || args[0].equals("/?") || args[0].equals("")){
                 System.out.println("java -jar schneeimsommer-1.0-SNAPSHOT.jar \"-summerData=PATH SUMMERDATA (zipfile)\" \"-winterData=PATH WINTERDATA (zipfile)\" \"-outputData=PATH\\output.png\" \"-coordinatesSkiRULat=Lat(Right bottom, ski area)\" \"-coordinatesSkiRULon=Lon(Right bottom, ski area)\" \"-coordinatesSkiLBLat= Lat(Left top, ski area)\" \"—coordinatesSkiLBLon=Lon(Left top, ski area)\" \"-coordinatesRefRULat=Lat(right bottom, reference area)\" \"-coordinatesRefRULon=Lon(right bottom, reference area)\" \"-coordinatesRefLBLat=Lat(left top, reference area)\" \"-coordinatesRefLBLon=Lon(left top, reference area)\"");
                 return;
             }
